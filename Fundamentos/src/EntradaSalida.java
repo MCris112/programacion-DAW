@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class EntradaSalida {
 
     public static void main(String[] args) {
@@ -38,5 +40,45 @@ public class EntradaSalida {
         System.out.println( "|----------|----------|------------|");
         System.out.println( "|Producto  | "+valor+"        | "+precio+" |");
         System.out.println( "|----------|----------|------------|");
+
+        //Introducir entrada por teclado
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Introduce la cadena de texto deseada: ");
+        //int number = scanner.nextInt();
+
+        //System.out.println("El numero introducido es: "+number);
+//
+//        System.out.println("Introduce: Nombre, Apellido, Edad, Profesion");
+//
+//        //Lee nombre
+//        String nombre = scanner.next();
+//        //Leer apellido
+//        String apellido = scanner.next();
+//        //Leer edad
+//        int edad = scanner.nextInt();
+//        //Leer profesion
+//        String profesion = scanner.next();
+//
+//        System.out.println("El usuario se llama "+nombre+" "+apellido+" tiene: "+edad+" años y trabaja en: "+profesion);
+
+            System.out.println("Introduce tu nombre");
+            String nombre = scanner.nextLine();
+
+            System.out.println("Introduce tu apellido: ");
+            String apellido = scanner.nextLine();
+
+            System.out.println("Introduce tu edad: ");
+            int edad = scanner.nextInt();
+
+            System.out.println("Introduce tu profesion: ");
+            String profesion = scanner.nextLine();
+
+            System.out.println("El usuario se llama "+nombre+" "+apellido+" tiene: "+edad+" años y trabaja en: "+profesion);
+
+
+
+            scanner.close();
     }
 }
