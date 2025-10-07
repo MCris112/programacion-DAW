@@ -1,5 +1,3 @@
-package fundamentos.lib
-
 public class Matematicas {
 
     public static int sumar(int a, int b){

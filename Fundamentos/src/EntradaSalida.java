@@ -71,6 +71,7 @@ public class EntradaSalida {
 
             System.out.println("Introduce tu edad: ");
             int edad = scanner.nextInt();
+            scanner.nextLine();
 
             System.out.println("Introduce tu profesion: ");
             String profesion = scanner.nextLine();
