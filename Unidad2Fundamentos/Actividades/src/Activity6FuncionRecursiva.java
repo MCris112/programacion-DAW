@@ -2,15 +2,16 @@ import Utilities.MC;
 
 import java.util.Scanner;
 
+//Recursivo e Iterativo
 public class Activity6FuncionRecursiva {
 
     static Scanner sc = new Scanner(System.in);
 
     static void main() {
 
-        One.run();
+        //One.run();
 
-        //Two.run();
+        Two.run();
 
         //Three.run();
 
@@ -36,18 +37,29 @@ public class Activity6FuncionRecursiva {
             {
                 MC.printTitle("Digitos: 1");
             }else {
-                MC.printTitle("Digitos: " + contarDigitos(numero, 0));
+                MC.printTitle("Digitos: " + contarDigitos(numero));
             }
         }
 
-        static int contarDigitos(int numero, int digitos)
+        // Estaba pensando en modo TREE, para guardar el contador = digitos
+//        static int contarDigitos(int numero, int digitos)
+//        {
+//            if ( numero <= 0 )
+//            {
+//                return digitos;
+//            }
+//
+//            return contarDigitos( numero / 10, digitos + 1 );
+//        }
+
+        static int contarDigitos(int numero)
         {
-            if ( numero <= 0 )
+            if (numero <= 10)
             {
-                return digitos;
+                return 1;
             }
 
-            return contarDigitos( numero / 10, digitos + 1 );
+            return 1+ contarDigitos( numero / 10 );
         }
 
     }
@@ -66,18 +78,16 @@ public class Activity6FuncionRecursiva {
             System.out.print("Inserte n: ");
             int a = Math.abs(sc.nextInt());
 
+            MC.printTitle("Suma total: "+suma(a));
 
-            int sum = suma(0, a);
-
-            MC.printTitle("Suma total: "+sum);
         }
 
-        public static int suma(int num, int pos)
+        public static int suma(int num)
         {
-            if (pos == 0)
-                return num;
+            if (num == 0)
+                return 0;
 
-            return suma( num + pos, pos - 1 );
+            return num + suma( num - 1 );
         }
     }
 
