@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class Activity3 {
 
     static void main() {
-        MC.printTitle("Te digo tu signo \uD83D\uDD2E");
+        MC.title.outline("Te digo tu signo \uD83D\uDD2E");
 
         Scanner sc = new Scanner(System.in);
 
@@ -40,41 +40,76 @@ public class Activity3 {
         // Aries: 21 de marzo al 19 de abril
         if( isDate(day, 21, 19, month, 3, 4) )
         {
-            MC.printRow("Tu signo es Aries ♈");
+            MC.title.outlineY("✨ Tu signo es ✨ ", "Aries ♈");
         }
 
         // Tauro: 20 de abril y al 20 de mayo
-        if ( isDate(day, 20, 20, month, 4, 5) )
+        else if ( isDate(day, 20, 20, month, 4, 5) )
         {
-            MC.printRow("Tu signo es Tauro ♉");
+            MC.title.outlineY("✨ Tu signo es ✨ ", "Tauro ♉");
         }
 
         // Géminis: 21 de mayo al 20 de junio
-        if( isDate(day, 21, 20, month, 5, 6) )
+        else if( isDate(day, 21, 20, month, 5, 6) )
         {
-            MC.printRow("Tu signo es Géminis ♊");
+            MC.title.outlineY("✨ Tu signo es ✨ ", " Géminis ♊");
         }
 
         // Cáncer: 21 de junio al 22 de julio
 //        if( (month == 6 && day >= 1 && day <= 21) || (month == 7 && day >= 1 && day <= 22))
-        if( isDate(day, 21, 22, month, 6, 7) )
+        else if( isDate(day, 21, 22, month, 6, 7) )
         {
-            MC.printRow("Tu signo es Cáncer ♋");
+            MC.title.outlineY("✨ Tu signo es ✨ ", " Cáncer ♋");
         }
 
-        if ( (day == 23 || day == 22) && (month == 7 || month == 8) )
+        // Leo: 23 de julio al 22 de agosto
+        else if ( isDate(day, 23, 22, month, 7, 8) )
         {
-            MC.printRow("Tu signo es Leo ♌");
+            MC.title.outlineY("✨ Tu signo es ✨ ", " Leo ♌");
         }
 
-        if ( (day == 23 || day == 22) && (month == 8 || month == 9) )
+        // Virgo: 23 de agosto al 22 de septiembre
+        else if ( isDate(day, 23, 22, month, 8, 9) )
         {
-            MC.printRow("Tu signo es Virgo ♍");
+            MC.title.outlineY("✨ Tu signo es ✨ ", " Virgo ♍");
         }
 
-        if ( (day == 23 || day == 22) && (month == 9 || month == 8) )
+        // Libra: 23 de septiembre al 22 de octubre
+        else if (  isDate(day, 23, 22, month, 9, 10) )
         {
-            MC.printRow("Tu signo es Libra ♎");
+            MC.title.outlineY("✨ Tu signo es ✨ ", "Libra ♎");
+        }
+
+        // Escorpio: 23 de octubre al 21 de noviembre
+        else if (  isDate(day, 23, 21, month, 10, 11) )
+        {
+            MC.title.outlineY("✨ Tu signo es ✨ ", "Escorpio ♏");
+        }
+
+        // Sagitario: 22 de noviembre al 21 de diciembre
+        else if (  isDate(day, 22, 21, month, 11, 12) )
+        {
+            MC.title.outlineY("✨ Tu signo es ✨ ", " Sagitario ♐");
+        }
+
+        // Capricornio: 22 de diciembre al 19 de enero
+        else if (  isDate(day, 22, 19, month, 12, 19) )
+        {
+            MC.title.outlineY("✨ Tu signo es ✨ ", " Capricornio ♑");
+        }
+
+        // Acuario: 20 de enero al 18 de febrero
+        else if (  isDate(day, 20, 18, month, 12, 19) )
+        {
+            MC.title.outlineY("✨ Tu signo es ✨ ", "Acuario ♒");
+        }
+
+        // Piscis: 19 de febrero al 20 de marzo
+        else if (  isDate(day, 19, 20, month, 12, 19) )
+        {
+            MC.title.outlineY("✨ Tu signo es ✨ ", "Piscis ♓");
+        }else{
+            MC.printRow( "Fecha erronea, intente de nuevo");
         }
     }
 
@@ -101,41 +136,53 @@ public class Activity3 {
          *
          * FIN
          */
-        boolean result = false;
+
 
         if ( month == sinceMonth && day >= sinceDay)
         {
+            int maxDay = getMaxDayInMonth(month);
+            if ( maxDay == 0 || day > maxDay)
+            {
+                //  is outdate or month doesnt exists
+                return false;
+            }
+
             return true;
         } else if (month == untilMonth && day <= untilDay) {
+            int maxDay = getMaxDayInMonth(month);
+            if ( maxDay == 0 || day > maxDay)
+            {
+                //  is outdate or month doesnt exists
+                return false;
+            }
+
             return true;
         }else{
             return false;
         }
+    }
 
-//        if ( month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 ) {
-//            if ( day >= 1 && day<=30 )
-//            {
-//                MC.printRow( "Fecha correcta");
-//            }else{
-//                MC.printRow("Fecha Incorrecta");
-//            }
-//        }else if( month == 4 || month == 6 || month == 9 || month ==11) {
-//            if ( day >= 1 && day<=30 )
-//            {
-//                MC.printRow( "Fecha correcta");
-//            }else{
-//                MC.printRow("Fecha Incorrecta");
-//            }
-//        } else if( month == 2){
-//            if ( day >= 1 && day<=29 )
-//            {
-//                //Omitiendo comprobar si es bisiesto
-//                MC.printRow( "Fecha correcta");
-//            }else{
-//                MC.printRow("Fecha Incorrecta");
-//            }
-//        }
-//
-//        return result;
+    static int getMaxDayInMonth(int month)
+    {
+        switch (month)
+        {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                return 31;
+            case 2:
+                return 29;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            default:
+                return 0;
+        }
     }
 }

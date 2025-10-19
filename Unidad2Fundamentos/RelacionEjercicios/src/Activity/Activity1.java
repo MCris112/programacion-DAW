@@ -11,26 +11,28 @@ import java.time.LocalDateTime;
 public class Activity1 {
 
     public static void main(String[] args) {
-        LocalDateTime time = LocalDateTime.now();
 
-        MC.printTitle("Saludo \uD83D\uDC4B");
-//        time.withHour(4);
+        MC.printBanner();
+
+        MC.title.outline("Saludo \uD83D\uDC4B");
+
+        System.out.println();
+
+        LocalDateTime time = LocalDateTime.now();
 
         if (time.getHour() >= 6 && time.getHour() <= 12) {
             //Mañana
-            MC.printRow("Buenos dias");
+            MC.title.outlineY("Buenos dias");
         }
 
         if (time.getHour() >= 13 && time.getHour() <= 20) {
             //Tarde
-            MC.printRow("Buenas tardes");
+            MC.title.outlineY("Buenas tardes");
         }
 
         if ( time.getHour() >= 21 || time.getHour() <= 5) {
             //Noche
-            MC.printRow("Buenas noches");
+            MC.title.outlineY("Buenas noches");
         }
-
-        MC.printLine();
     }
 }

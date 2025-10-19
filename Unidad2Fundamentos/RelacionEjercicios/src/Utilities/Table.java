@@ -4,20 +4,26 @@ import java.util.ArrayList;
 
 public class Table {
 
-    private String title;
+    private final ArrayList<TableRow> rows = new ArrayList<TableRow>();
 
-    private final ArrayList<TableRow> rows;
+    public Table() {
 
+    }
 
     public Table(String title)
     {
-        this.title = title;
-        this.rows = new ArrayList<TableRow>();
     }
 
-    public void addRow(String... text)
+    public static Table instance()
+    {
+        return new Table();
+    }
+
+    public Table addRow(String... text)
     {
         rows.add( new TableRow(text) );
+
+        return this;
     }
 
     private void printLine(int size)
@@ -30,18 +36,43 @@ public class Table {
 
     public void print()
     {
-        int widthSize = 30;
 
-        if(!this.rows.isEmpty())
+        if(this.rows.isEmpty())
         {
-            widthSize = rows.getFirst().getWidth();
+            return;
         }
 
-        this.printLine( widthSize );
-       for (TableRow row : rows)
-       {
-           row.print();
-            this.printLine( widthSize );
-       }
+        int baseWidth = 8; // smaller default
+        ArrayList<Integer> columnWidths = new ArrayList<>();
+
+        // initialize widths
+        for (int i = 0; i < this.rows.getFirst().count(); i++) {
+            columnWidths.add(baseWidth);
+        }
+
+        // compute max width per column
+        for (TableRow row : this.rows) {
+            for (int i = 0; i < row.count(); i++) {
+                if (row.getWidthAt(i) > columnWidths.get(i)) {
+                    columnWidths.set(i, row.getWidthAt(i));
+                }
+            }
+        }
+
+        this.printLine(totalWidth(columnWidths));
+        for (TableRow row : this.rows) {
+            row.print(columnWidths, columnWidths.size()); // pass widths so each col is padded correctly
+            this.printLine(totalWidth(columnWidths));
+        }
     }
+
+    private int totalWidth(ArrayList<Integer> columnWidths) {
+        int sum = 0; // starting '|'
+        for (int w : columnWidths) {
+            sum += w + 3; // space + content + space + border
+        }
+
+        return sum -1 ; // final border
+    }
+
 }

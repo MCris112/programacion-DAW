@@ -141,17 +141,17 @@ public class Activity6FuncionRecursiva {
             }else{
                 System.out.println();
 
-                MC.printTitle("Resultado: "+convierte(num, ""));
+                MC.printTitle("Resultado: "+convierte(num));
             }
         }
 
-        static String convierte(int num, String binario)
+        static String convierte(int num)
         {
             //paso 4
             if ( num == 0 )
-                return binario;
+                return "";
 
-            return convierte( num/2 , num%2+ binario);
+            return convierte( num/2 ) + (num%2);
         }
     }
 

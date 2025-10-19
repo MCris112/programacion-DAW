@@ -16,11 +16,12 @@ public class Activity1BuscaArray {
         {
             System.out.println("No existe el numero");
         }else{
-            for (int i = 0; i < numbers.length ; i++) {
+            for (int i = 0; i != search ; i++) {
                 if (numbers[i] == search) {
                     System.out.println("El numero es: "+numbers[i] + " - Posición: "+i);
                 }
             }
+
         }
     }
 }

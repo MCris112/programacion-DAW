@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Activity2 {
 
     public static void main() {
-        MC.printTitle("Calcular Salario semanal");
+        MC.title.outline("Calcular Salario semanal");
 
         Scanner sc = new Scanner(System.in);
 
@@ -35,6 +35,7 @@ public class Activity2 {
             pago = hours*12;
         }
 
-        MC.printRow("El sueldo semanal que le corresponde: "+pago+" euros");
+        System.out.println();
+        MC.title.outlineY("El sueldo semanal que le corresponde: "+pago+" euros");
     }
 }

@@ -4,12 +4,30 @@ import java.util.ArrayList;
 
 public class MC {
 
-    public static void printTitle(String title)
+    private static int containerLenght = 30;
+
+    public static MCTitle title = new MCTitle();
+
+    public static void printBanner()
     {
-        System.out.println("|--------------------------------|");
-        System.out.printf("| %-30s | \n", title );
-        System.out.println("|--------------------------------|");
+        /**
+         *   ██████╗██████╗ ██╗██╗███████╗
+         *  ██╔════╝██╔══██╗██║██║██╔════╝
+         *  ██║     ██████╔╝██║██║███████╗ 24 {9}, 25 {10}
+         *  ██║     ██╔═══╝ ██║██║╚════██║
+         *  ╚██████╗██║     ██║██║███████║
+         *   ╚═════╝╚═╝     ╚═╝╚═╝╚══════╝
+         */
+        System.out.println("\n");
+        System.out.println("   ██████╗██████╗ ██╗ ███████╗");
+        System.out.println("  ██╔════╝██╔══██╗██║ ██╔════╝");
+        System.out.println("  ██║     ██████╔╝██║ ███████╗");
+        System.out.println("  ██║     ██╔═██║ ██║ ╚════██║");
+        System.out.println("  ╚██████╗██║ ██║ ██║ ███████║");
+        System.out.println("   ╚═════╝╚═╝ ╚═╝ ╚═╝ ╚══════╝");
+        System.out.println("\n");
     }
+
 
     public static void print(String text)
     {
