@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  */
 public class Activity1 {
 
-    public static void main(String[] args) {
+    public static void main() {
 
         MC.printBanner();
 
