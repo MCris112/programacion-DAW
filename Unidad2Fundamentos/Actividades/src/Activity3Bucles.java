@@ -1,6 +1,7 @@
 import Utilities.MC;
 import Utilities.Table;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Activity3Bucles {
