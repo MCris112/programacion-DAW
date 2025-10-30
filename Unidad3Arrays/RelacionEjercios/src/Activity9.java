@@ -63,19 +63,30 @@ public class Activity9 {
     public static void push()
     {
 
+        System.out.println("Ingrese un número:");
+        list.add( Integer.parseInt(sc.nextLine()) );
+
+        MC.title.outlineY("Se ingreso correctamente");
     }
 
     public static void delete()
     {
+        System.out.println("¿Cual es el número a eliminar?");
+        int num = Integer.parseInt(sc.nextLine());
+
+        list.removeIf( n -> n == num );
+        MC.title.outlineY("Se eliminarón: ");
     }
 
     public static void show()
     {
         MC.title.outlineY("Tu array creado:");
 
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + ", ");
+        MC.printLine();
+        for (Integer integer : list) {
+            System.out.print(integer + ", ");
         }
+        MC.printLine();
     }
 
     public  static void exists()
