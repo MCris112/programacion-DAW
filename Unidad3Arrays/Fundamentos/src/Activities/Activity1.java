@@ -14,7 +14,7 @@ public class Activity1 {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce un número a buscar");
         int num = sc.nextInt();
-        if ( num > 9 )
+        if ( num < 1 || num > 9 )
         {
             System.out.println("Se puede buscar entre 1 - 9");
         }else{

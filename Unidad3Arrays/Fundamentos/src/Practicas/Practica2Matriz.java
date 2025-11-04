@@ -1,5 +1,9 @@
 package Practicas;
 
+/**
+ *  Realizar el recorrido para la siguiente matrices
+ *  Página 10
+ */
 public class Practica2Matriz {
 
     static void main() {

@@ -1,75 +1,81 @@
 package Activities;
 
+import Utilities.MC;
+import Utilities.Table;
+
+import java.util.Scanner;
+
+/**
+ * Realiza un programa que inserta valores en una matriz dinámica y devuelva la
+ * suma de los valores de cada fila y columna
+ */
 public class Activity3 {
+
     static void main() {
-        int[] arrayOld = { 3, 2, 5, 7, 8 };
+        int[][] matriz;
 
-//        int[] arrayNew = insertIn(arrayOld, 4, 5);
-        int[] arrayNew = deleteNum(arrayOld, 2);
+        MC.title.outline("Calculo");
 
-        for (int i = 0; i < arrayNew.length; i++) {
-            System.out.print(arrayNew[i] + " ");
-        }
-    }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Inserte la cantidad de filas");
 
-    static int[] deleteNum(int[] array, int num )
-    {
-        int removeInts = 0;
+        matriz = new int[Integer.parseInt(sc.nextLine())][];
+        System.out.println("Inserte la cantidad de columnas");
 
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == num) { removeInts++; }
-        }
+        int columnas = Integer.parseInt(sc.nextLine());
 
-        int[] newArray = new int[array.length - removeInts];
-        int pos = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != num) {
-                newArray[pos] = array[i];
-                pos++;
+        for (int i = 0; i < matriz.length; i++) {
+
+            matriz[i] = new int[columnas];
+
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.println("Inserte dato de Fila: "+i + " columna: "+j);
+                matriz[i][j] = Integer.parseInt(sc.nextLine());
             }
         }
 
-        return newArray;
-    }
+        MC.title.outlineY("Tu matriz");
+        MC.printMatrix(matriz);
 
-    static int[] addNum(int num, int[] array )
-    {
-        int[] newArray = new int[array.length + 1];
-        for (int i = 0; i < array.length; i++) {
-            newArray[i] = array[i];
+        System.out.println();
+
+        MC.title.outlineY("Suma de filas");
+
+        Table table = Table.instance().addRow("Fila", "Suma");
+
+        // Suma de filas
+        for ( int i = 0; i < matriz.length; i++ ) {
+            int sum = 0;
+            for ( int j = 0; j < matriz[i].length; j++ )
+                sum += matriz[i][j];
+
+            table.addRow("F1", sum+"");
         }
 
-        newArray[array.length] = num;
+        table.print();
 
-        return newArray;
-    }
+        System.out.println();
 
-    static int[] insertIn(int[] vector, int pos, int val)
-    {
-        if (pos > vector.length) {
-            int[] newArray = new int[pos+1];
+        MC.title.outlineY("Suma de Columnas");
 
-            for (int i = vector.length; i < pos; i++) {
-                newArray[i] = 0;
+        Table tableCol = Table.instance().addRow("Columna", "Suma");
+
+        int[] sumCol =  new int[columnas];
+
+        // Suma de filas
+        for ( int i = 0; i < matriz.length; i++ ) {
+
+            for ( int j = 0; j < matriz[i].length; j++ )
+            {
+                sumCol[j] += matriz[i][j];
             }
 
-            newArray[pos] = val;
-
-            return newArray;
-        }else{
-
-            int[] newArray = new int[vector.length+1];
-            for (int i = 0; i < pos; i++) {
-                newArray[i] = vector[i];
-            }
-
-            newArray[pos] = val;
-
-            for (int i = pos +1; i < newArray.length; i++) {
-                newArray[i] = vector[i-1];
-            }
-
-            return newArray;
         }
+
+        for (int k = 0; k < sumCol.length; k++ ) {
+            tableCol.addRow("C"+k, sumCol[k]+"");
+        }
+
+        tableCol.print();
     }
 }
