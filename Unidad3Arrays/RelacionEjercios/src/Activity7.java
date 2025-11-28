@@ -73,7 +73,7 @@ public class Activity7 {
        };
 
 
-       matrix[0][0] = order[5]; matrix[0][1] = order[0]; matrix[0][2] = order[1]; matrix[0][3] = order[2]; matrix[0][4] = order[3];
+       matrix[0][0] = order[5];matrix[0][1] = order[0]; matrix[0][2] = order[1]; matrix[0][3] = order[2]; matrix[0][4] = order[3];
        matrix[1][0] = order[7];                                                                            matrix[1][4] = order[4];
        matrix[2][0] = order[9];                                                                            matrix[2][4] = order[6];
        matrix[3][0] = order[11];                                                                           matrix[3][4] = order[8];

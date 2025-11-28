@@ -1,6 +1,6 @@
-package Practica.Practica2;
+package Practica.Practica3;
 
-public class Practica2 {
+public class Practica3 {
 
     static void main() {
         Libro libro = new Libro( "123", "Isla del tesoro", 1979, 19.85);

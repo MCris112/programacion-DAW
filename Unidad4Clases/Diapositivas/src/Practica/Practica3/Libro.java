@@ -1,4 +1,4 @@
-package Practica.Practica2;
+package Practica.Practica3;
 
 import Utilities.Table;
 
