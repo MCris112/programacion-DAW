@@ -1,5 +1,7 @@
 package Actividades.Actividad2;
 
+import Utilities.Table;
+
 public class Ciudad {
 
     private int codigo;
@@ -34,5 +36,14 @@ public class Ciudad {
 
     public void setIndicativo(int indicativo) {
         this.indicativo = indicativo;
+    }
+
+    public void show()
+    {
+        Table.instance()
+                .addRow("Codigo", this.codigo+"")
+                .addRow("Nombre", this.nombre)
+                .addRow("Indicativo", this.indicativo+"")
+                .print();
     }
 }

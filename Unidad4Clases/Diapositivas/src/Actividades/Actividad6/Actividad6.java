@@ -1,69 +1,72 @@
 package Actividades.Actividad6;
 
-import Actividades.Actividad6.Relaciones.Escribe;
-import Actividades.Actividad6.Relaciones.Publica;
+import Utilities.Table;
+
+import java.util.ArrayList;
 
 public class Actividad6 {
 
-    static void main() {
-        Periodista periodista1 = new Periodista(
-                1, "Doming", "Lopez Oller", "666777999", " Investigacion"
+    public static void main(String[] args) {
+        // sucursales
+        Sucursal sucMadrid = new Sucursal(1, "911223344", "Calle Mayor 123", "Madrid", "Madrid");
+        Sucursal sucBarcelona = new Sucursal(2, "933445566", "Av. Diagonal 456", "Barcelona", "Barcelona");
+
+        // hoteles
+        Hotel hotelSol = new Hotel(1, "Hotel Sol", "910000111", "Madrid", "Gran Vía 45", 200);
+        Hotel hotelMar = new Hotel(2, "Hotel Mar", "930000222", "Barcelona", "Passeig de Gràcia 78", 150);
+
+        // turistas
+        Turista ana = new Turista(1, "Calle Luna 12", "Ana", "Martínez", "600123456");
+        Turista pedro = new Turista(2, "Av. Sol 34", "Pedro", "García", "600654321");
+
+        // vuelos
+        Vuelo vueloMadridParis = new Vuelo(1, "15/12/2025", "Madrid", "París", 10, 180);
+        Vuelo vueloBarcelonaRoma = new Vuelo(2, "20/12/2025", "Barcelona", "Roma", 14, 150);
+
+        // Simular la tabla de relacion de reservaciones
+        ArrayList<Reservaciones> reservas = new ArrayList<>();
+        reservas.add(
+                new Reservaciones(ana, hotelSol, sucMadrid, "14/12/2025", "18/12/2025", Regimen.MEDIA_PENSION)
+        );
+        reservas.add(
+                new Reservaciones(pedro, hotelMar, sucBarcelona, "19/12/2025", "23/12/2025", Regimen.PENSION_COMPLETA)
         );
 
-        Periodista periodista2  = new Periodista(
-                2, "Nicolas", "Asencio Perez", "123456789", "Buscador"
-        );
+        // Simular la tabla de relacion de vuelos
+        ArrayList<TomaDeVuelo> vuelosTomados = new ArrayList<>();
+
+        TomaDeVuelo toma1 = new TomaDeVuelo();
+        toma1.setTurista(ana);
+        toma1.setVuelo( vueloMadridParis);
+        toma1.setSucursal( sucMadrid );
+        toma1.setClase( "Turista" );
+        vuelosTomados.add(toma1);
 
 
+        TomaDeVuelo toma2 = new TomaDeVuelo();
+        toma2.setTurista( pedro );
+        toma2.setVuelo( vueloBarcelonaRoma );
+        toma2.setSucursal( sucBarcelona );
+        toma2.setClase( "Business" );
 
-        Revista revista1 = new Revista(
-                1, "OXFORD", "Deporte", "Diario"
-        );
-        Revista revista2  = new Revista(
-                2, "ABC", "Periodico", "Diario"
-        );
+        vuelosTomados.add(toma2);
 
-        Seccion seccion1 = new Seccion( "Deporte", "123");
-        Ejemplar ejemplar1 = new Ejemplar( "12/11/25", 32, 3);
+        // Mostrar hoteles
+        System.out.println("=== Hoteles ===");
+        System.out.println(hotelSol);
+        System.out.println(hotelMar);
 
-        seccion1.setRevista(revista1);
-        ejemplar1.setRevista(revista1);
+        System.out.println("\n=== Reservaciones ===");
+        for (Reservaciones r : reservas) {
+            r.show();
+            System.out.println();
+        }
 
-        //TODO terminar de hacer las relacion de revista2
-
-
-
-        Sucursal sucursal1 = new Sucursal(
-                1, "Direccion", "999666333", "Huercal Overa", "Almeria"
-        );
-
-
-        Empleado emp1 = new Empleado(
-                1, "1111111111", "Alvaro", "Asdfs", "123456789"
-        );
-
-        Empleado emp2 = new Empleado(
-                2, "22222222", "Maria", "Garcia", "99999999x"
-        );
-        Empleado emp3 = new Empleado(
-                3, "333333", "Aurora", "Lopez", "99x92223"
-        );
-
-
-        Publica[] publicaciones = new Publica[5];
-        Publica p1 = new Publica(sucursal1, revista1);
-        Publica p2 = new Publica(sucursal1, revista2);
-        publicaciones[0] = p1;
-        publicaciones[1] = p2;
-
-        Escribe[] escribes = new  Escribe[3];
-        Escribe e1 = new Escribe( revista1, periodista1);
-        Escribe e2 = new Escribe( revista1, periodista2);
-        escribes[0] = e1;
-        escribes[1] = e2;
-
-
-        System.out.println(periodista1);
-        System.out.println(emp1);
+        System.out.println("\n=== Vuelos Tomados ===");
+        for (TomaDeVuelo t : vuelosTomados) {
+            t.show();
+            System.out.println();
+        }
     }
+
 }

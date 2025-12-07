@@ -1,35 +1,27 @@
-package Actividades.Actividad6;
+package Actividades.Actividad3;
 
-public class Sucursal {
+public class Proveedor {
+    private int codigo;
+    private String direccion;
+    private String ciudad;
+    private String provincia;
 
-    private int id;
-    private String telefono, direccion, ciudad, provincia;
-
-    public Sucursal() {
+    public Proveedor() {
     }
 
-    public Sucursal(int id, String telefono, String direccion, String ciudad, String provincia) {
-        this.id = id;
-        this.telefono = telefono;
+    public Proveedor(int codigo, String direccion, String ciudad, String provincia) {
+        this.codigo = codigo;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.provincia = provincia;
     }
 
-    public int getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getDireccion() {
@@ -58,9 +50,8 @@ public class Sucursal {
 
     @Override
     public String toString() {
-        return "Sucursal{" +
-                "id=" + id +
-                ", telefono='" + telefono + '\'' +
+        return "Proveedor{" +
+                "codigo=" + codigo +
                 ", direccion='" + direccion + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", provincia='" + provincia + '\'' +

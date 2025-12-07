@@ -13,6 +13,7 @@ public class Actividad1 {
         Persona aurora = new Persona("Aurora", "72QUESO", LocalDate.parse("01/10/2003", fmt), "Calle Aguaimanto", Genero.FEMININO, EstadoCivil.SOLTERO);
 
         cuenta.setPersona(aurora);
+        cuenta.setSaldo(303.30);
 
         cuenta.imprimir();
     }

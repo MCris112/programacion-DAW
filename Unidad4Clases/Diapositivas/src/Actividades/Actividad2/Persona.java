@@ -1,7 +1,8 @@
 package Actividades.Actividad2;
 
 
-import mcris112.MCUtilities.Table;
+import Utilities.MC;
+import Utilities.Table;
 
 public class Persona {
     private String cedula;
@@ -82,6 +83,20 @@ public class Persona {
                 .addRow("Nombre", this.nombre)
                 .addRow("Apellido", this.apellido)
                 .addRow("Genero", this.genero+"")
+                .addRow("Nacimiento", this.fecha.toString())
                 .print();
+
+        if( this.nacimiento != null )
+        {
+            MC.title.outlineY("Ciudad de nacimiento");
+            this.nacimiento.show();
+        }
+
+        if( this.residencia != null )
+        {
+            MC.title.outlineY("Ciudad de recidencia");
+
+            this.residencia.show();
+        }
     }
 }

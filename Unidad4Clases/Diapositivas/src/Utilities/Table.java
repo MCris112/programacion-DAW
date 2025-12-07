@@ -1,12 +1,11 @@
 package Utilities;
 
-import mcris112.MCUtilities.TableRow;
 
 import java.util.ArrayList;
 
 public class Table {
 
-    private final ArrayList<mcris112.MCUtilities.TableRow> rows = new ArrayList<mcris112.MCUtilities.TableRow>();
+    private final ArrayList<TableRow> rows = new ArrayList<TableRow>();
 
     public Table() {
 
@@ -23,7 +22,7 @@ public class Table {
 
     public Table addRow(String... text)
     {
-        rows.add( new mcris112.MCUtilities.TableRow(text) );
+        rows.add( new TableRow(text) );
 
         return this;
     }
@@ -41,7 +40,7 @@ public class Table {
     {
         int max = 0;
 
-        for (mcris112.MCUtilities.TableRow row : rows)
+        for (TableRow row : rows)
         {
             if (row.count() > max)
                 max = row.count();
@@ -67,7 +66,7 @@ public class Table {
         }
 
         // compute max width per column
-        for (mcris112.MCUtilities.TableRow row : this.rows) {
+        for (TableRow row : this.rows) {
             for (int i = 0; i < row.count(); i++) {
                 if (row.getWidthAt(i) > columnWidths.get(i)) {
                     columnWidths.set(i, row.getWidthAt(i));
