@@ -3,6 +3,14 @@ package Actividades.Actividad1;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *  Actividad: Crea las clase CuentaCorriente que tiene como atributos
+ * una Persona (nombre, DNI, fechaNacimiento, dirección, género,
+ * estado civil), el número de cuenta y su saldo. En ambas clases crea
+ * sus correspondientes constructores y funciones necesarias para
+ * mostrar información y modificar los valores de atributos. Haz uso de
+ * ambas clases en otro fichero que tendrá el main.
+ */
 public class Actividad1 {
 
     static void main() {

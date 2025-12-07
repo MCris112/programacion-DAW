@@ -2,6 +2,11 @@ package Actividades.Actividad5;
 
 import java.util.ArrayList;
 
+/**
+ * Actividad: Crea las clases en JAVA con sus correspondientes
+ * constructores y funciones necesarias para mostrar información y
+ * modificar los atributos del siguiente diagrama E-R
+ */
 public class Actividad5 {
 
     static void main() {

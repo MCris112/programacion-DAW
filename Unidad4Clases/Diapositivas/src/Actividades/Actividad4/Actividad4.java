@@ -3,6 +3,11 @@ package Actividades.Actividad4;
 import Actividades.Actividad4.Relaciones.Escribe;
 import Actividades.Actividad4.Relaciones.Publica;
 
+/**
+ * ● Actividad: Crea las clases en JAVA con sus correspondientes
+ * constructores y funciones necesarias para mostrar información y
+ * modificar los atributos del siguiente diagrama E-R
+ */
 public class Actividad4 {
 
     static void main() {

@@ -4,6 +4,11 @@ import Utilities.Table;
 
 import java.util.ArrayList;
 
+/**
+ * Actividad: Crea las clases en JAVA con sus correspondientes
+ * constructores y funciones necesarias para mostrar información y
+ * modificar los atributos del siguiente diagrama E-R
+ */
 public class Actividad6 {
 
     public static void main(String[] args) {

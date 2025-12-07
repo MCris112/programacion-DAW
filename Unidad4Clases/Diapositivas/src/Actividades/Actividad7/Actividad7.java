@@ -1,5 +1,21 @@
 package Actividades.Actividad7;
 
+/**
+ * ● Actividad: Hemos recibido el encargo de un cliente para definir las clases necesarias
+ * (atributos, constructores y get/set) para gestionar una empresa ferroviaria, en la que se
+ * distinguen dos grandes grupos: el personal y la maquinaria.
+ * En el primero se ubican todos los empleados de la empresa, que se clasifican en tres grupos:
+ * ● Maquinistas: nombre, DNI, sueldo y rango
+ * ● Mecánicos: nombre, DNI, teléfono, especialidad. La especialidad será un enum
+ * (frenos, hidráulica, electricidad o motor)
+ * En cuanto a maquinaria podemos encontrar:
+ * ● Vagón: número, carga máxima, carga actual y tipo de mercancía
+ * ● Locomotora: matrícula, potencia, año de fabricación, mecánico que la repara
+ * ● Tren: formado por una locomotora, varios vagones y el maquinista responsable
+ * Crea una aplicación que haga uso de estas clases para indicar la situación de hasta 3 trenes
+ * que tengan (3, 4 y 2) vagones respectivamente. En main puedes asignar los valores que
+ * quieras a cada objeto. En este caso usarás arrays
+ */
 public class Actividad7 {
 
     static void main() {
