@@ -19,7 +19,11 @@ public class Mazo {
 
         this.barajar();
 
-        return this.cartas.getFirst();
+        Carta carta = this.cartas.getFirst();
+
+        System.out.println("Sacaste la carta:");
+        System.out.println(carta);
+        return carta;
     }
 
     public boolean estaVacio()

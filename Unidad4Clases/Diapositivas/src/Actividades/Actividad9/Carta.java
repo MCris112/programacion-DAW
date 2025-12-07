@@ -18,4 +18,25 @@ public class Carta {
     public int getValor() {
         return valor;
     }
+
+    @Override
+    public String toString() {
+        String simbolo = switch (palo) {
+            case PICAS -> "♠";
+            case CORAZONES -> "♥";
+            case DIAMANTES -> "♦";
+            case TREBOLES -> "♣";
+        };
+
+        return """
+           ┌─────────┐
+           │ %-2d      │
+           │         │
+           │    %s    │
+           │         │
+           │      %-2d │
+           └─────────┘
+           """.formatted(valor, simbolo, valor);
+    }
+
 }

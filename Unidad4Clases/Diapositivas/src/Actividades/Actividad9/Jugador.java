@@ -4,7 +4,8 @@ public class Jugador {
 
     private String nombre;
 
-    private int puntuacion = 0;
+    // Que comienze con 3 oportunidades
+    private int puntuacion = 3;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -20,5 +21,10 @@ public class Jugador {
 
     public void sumarPunto() {
         puntuacion++;
+    }
+
+    public void restarPunto()
+    {
+        puntuacion--;
     }
 }
