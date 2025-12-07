@@ -1,5 +1,7 @@
 package Actividad3;
 
+import Utilities.Table;
+
 public class Trabajos {
 
     private Sucursal sucursal;
@@ -48,5 +50,17 @@ public class Trabajos {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public void show()
+    {
+        Table.instance()
+                .addRow("Trabajo")
+                .addRow("Empleado", empleado != null ? empleado.getNombre() : "Sin asignar")
+                .addRow("Legajo", empleado != null ? empleado.getLegajo() : "N/A")
+                .addRow("Sucursal", sucursal != null ? sucursal.getCiudad() : "Sin sucursal")
+                .addRow("Día", String.valueOf(dia))
+                .addRow("Horario", horario != null ? horario : "No definido")
+                .print();
     }
 }

@@ -8,18 +8,17 @@ public class Empleado {
 
     private Domicilio domicilio;
 
-    private ArrayList<String> telefonos;
+    private ArrayList<String> telefonos = new ArrayList<>();
 
     public Empleado() {
         this.telefonos = new ArrayList<>();
     }
 
-    public Empleado(String legajo, String dni, String nombre, Domicilio domicilio, ArrayList<String> telefonos) {
+    public Empleado(String legajo, String dni, String nombre, Domicilio domicilio) {
         this.legajo = legajo;
         this.dni = dni;
         this.nombre = nombre;
         this.domicilio = domicilio;
-        this.telefonos = telefonos;
     }
 
     public String getLegajo() {
@@ -69,5 +68,16 @@ public class Empleado {
 
     public void setTelefonos(ArrayList<String> telefonos) {
         this.telefonos = telefonos;
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "legajo='" + legajo + '\'' +
+                ", dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", domicilio=" + domicilio +
+                ", telefonos=" + telefonos +
+                '}';
     }
 }

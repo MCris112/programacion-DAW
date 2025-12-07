@@ -55,4 +55,25 @@ public class Tarjeta {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    @Override
+    public String toString() {
+        return """
+           ┌──────────────────────────────────┐
+           │   TARJETA DE CLIENTE             │
+           │                                  │
+           │   Número: %-20s   │
+           │   Código: %-20s   │
+           │                                  │
+           │   Titular: %-19s   │
+           │   Vencimiento: %-15s   │
+           └──────────────────────────────────┘
+           """.formatted(
+                   this.numero,
+                    this.codigo,
+                    this.cliente != null ? this.cliente.getNombre() : "Sin titular",
+                    this.fechaVencimiento
+                );
+    }
+
 }

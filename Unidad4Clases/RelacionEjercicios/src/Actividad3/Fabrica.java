@@ -55,4 +55,6 @@ public class Fabrica {
     public void setCantEmp(int cantEmp) {
         this.cantEmp = cantEmp;
     }
+
+
 }
