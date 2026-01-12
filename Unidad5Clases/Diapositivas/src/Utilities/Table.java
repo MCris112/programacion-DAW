@@ -102,4 +102,7 @@ public class Table {
         return sum -1 ; // final border
     }
 
+    public void pp() {
+
+    }
 }

@@ -10,6 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Actividad: Leer el fichero heroes.json y
+ * listar el héroe y alter ego de aquellos
+ * que son sólo de Marvel
+ */
 public class Activity7 {
 
     static void main() {
