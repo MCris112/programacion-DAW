@@ -1,6 +1,14 @@
-package Activities.Activity13;
+package Tarea.Activity13;
 
 /**
+ * Tarea: A partir del fichero heroes.json, vamos a:
+ * – Leer el fichero para obtener su JSONArray
+ * – Crear un Map<String, List<Heroe>> como HashMap
+ * – Mientras se recorren los héroes:
+ * ● Se obtendrá su nombre y editorial y se creará el Heroe
+ * ● Se creará un nuevo par clave-valor si no existe la clave
+ * ● Se añadirá el héroe a la lista correspondiente por clave
+ * – Se imprimen las listas de héroes de cada editorial por clave
  * {
  *     "superhero":"Batman",
  *     "publisher":"DC Comics",
