@@ -73,12 +73,40 @@ public class Activity3 {
 
 
         Table table = Table.instance()
-                .addRow("Nombre", "Nota Final");
+                .addRow("Nombre", "Nota Final", "Estado");
 
-        db.forEach( (alumno, nota) -> {
-            table.addRow( alumno, nota+"" );
-        } );
+        int suspensos = 0, aprovados = 0, notables = 0, sobresalientes = 0;
+
+        for (Map.Entry<String, Integer> entry : db.entrySet()) {
+            int nota = entry.getValue();
+
+            // suspensos, aprobados, notable y sobresalientes
+            String eval = "Suspenso";
+            if (nota >= 5 && nota < 7) {
+                eval = "Aprobado";
+                aprovados +=1;
+            } else if (nota >= 7 && nota < 9) {
+                eval = "Notable";
+                notables++;
+            } else if (nota >= 9) {
+                eval = "Sobresaliente";
+                aprovados++;
+            }else{
+                suspensos++;
+            }
+
+            table.addRow( entry.getKey(), nota+"", eval );
+        }
 
         table.print();
+
+        Table.instance()
+            .addRow("Estadistica")
+            .addRow("Estado", "Totales")
+            .addRow("Suspenso", String.valueOf(suspensos))
+            .addRow("Aprobados", String.valueOf(aprovados))
+            .addRow("Notables", String.valueOf(notables))
+            .addRow("Sobresalientes", String.valueOf(sobresalientes))
+                .print();
     }
 }
