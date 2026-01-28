@@ -21,11 +21,13 @@ public class CrearTablaPersona {
 
 
         try {
-            Schema.create("persona_dos", table -> {
+            Schema.create("persona_tres", table -> {
                 table.id();
                 table.varchar("nombre", 100).notNull().defaultVal("Algo");
                 table.varchar("email", 100);
                 table.date("fecha_nacimiento");
+                table.intCol("persona_id");
+                table.foreignKey("persona_id").references("persona_dos").on("id");
             });
 
             System.out.println("Tabla persona creada correctamente");

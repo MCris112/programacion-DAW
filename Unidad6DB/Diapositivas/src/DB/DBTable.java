@@ -10,6 +10,7 @@ public class DBTable {
     protected ArrayList<DBColumn> columns = new ArrayList<>();
 
     protected ArrayList<String> primaryKeys = new ArrayList<>();
+    protected ArrayList<ForeignKey> foreignKeys = new ArrayList<>();
 
     public DBTable(String tableName, boolean ifNotExists) {
         this.tableName = tableName;
@@ -74,6 +75,9 @@ public class DBTable {
     public DBColumn bigInt(String name) {
         return addColumn(new DBColumn(name, "BIGINT"));
     }
+    public DBColumn intCol(String name) {
+        return addColumn(new DBColumn(name, "INT"));
+    }
 
     public DBColumn decimal(String name, int precision, int scale) {
         DBColumn col = addColumn(new DBColumn(name, "DECIMAL").setLength(precision));
@@ -130,6 +134,11 @@ public class DBTable {
         return column;
     }
 
+    public ForeignKey foreignKey( String columnName )
+    {
+        return new ForeignKey(this.tableName, columnName);
+    }
+
     @Override
     public String toString() {
         String sql = "CREATE TABLE "+( this.ifNotExists ? "IF NOT EXISTS " : "")+this.tableName+" (";
@@ -156,6 +165,10 @@ public class DBTable {
             sql = sql.substring(0, sql.length()-1);
 
             sql = sql + ")";
+        }
+
+        for ( ForeignKey foreignKey : foreignKeys ) {
+            sql += foreignKey.toSql()+",";
         }
 
         sql += ");";

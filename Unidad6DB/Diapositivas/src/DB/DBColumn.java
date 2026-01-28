@@ -1,6 +1,6 @@
 package DB;
 
-public class DBColumn {
+public class DBColumn implements SqlAction{
 
     protected String type;
     protected String name;
@@ -63,7 +63,7 @@ public class DBColumn {
         this.extra = extra;
     }
 
-
+    @Override
     public String toSql()
     {
         String sql = this.name + " " + this.type.toUpperCase();
