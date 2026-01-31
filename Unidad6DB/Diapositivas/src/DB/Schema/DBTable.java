@@ -1,4 +1,4 @@
-package DB;
+package DB.Schema;
 
 import java.util.ArrayList;
 
@@ -80,7 +80,7 @@ public class DBTable {
     }
 
     public DBColumn decimal(String name, int precision, int scale) {
-        DBColumn col = addColumn(new DBColumn(name, "DECIMAL").setLength(precision));
+        DBColumn col = addColumn( new DBColumn(name, "DECIMAL") );
         col.setExtra( scale > 0 ? "(" + precision + "," + scale + ")" : "(" + precision + ")" );
         return col;
     }
@@ -124,11 +124,11 @@ public class DBTable {
 
     public DBColumn addColumn( DBColumn column )
     {
-        if ( column.isPrimaryKey() )
-        {
-            this.primaryKeys.add( column.getName() );
-            column.setPrimaryKey( false );
-        }
+//        if ( column.isPrimaryKey() )
+//        {
+//            this.primaryKeys.add( column.getName() );
+//            column.setPrimaryKey( false );
+//        }
 
         this.columns.add( column );
         return column;
@@ -141,6 +141,14 @@ public class DBTable {
 
     @Override
     public String toString() {
+        for ( DBColumn column : columns )
+        {
+            if ( column.isPrimaryKey() )
+            {
+                primaryKeys.add( column.getName() );
+            }
+        }
+
         String sql = "CREATE TABLE "+( this.ifNotExists ? "IF NOT EXISTS " : "")+this.tableName+" (";
 
 

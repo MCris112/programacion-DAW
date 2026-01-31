@@ -1,6 +1,8 @@
-package DB;
+package DB.Schema;
 
-public class DBColumn implements SqlAction{
+import DB.SqlAction;
+
+public class DBColumn implements SqlAction {
 
     protected String type;
     protected String name;

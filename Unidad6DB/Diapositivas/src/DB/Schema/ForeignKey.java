@@ -1,6 +1,8 @@
-package DB;
+package DB.Schema;
 
-public class ForeignKey implements SqlAction{
+import DB.SqlAction;
+
+public class ForeignKey implements SqlAction {
 
     protected String tableName;
     protected String columnName;
