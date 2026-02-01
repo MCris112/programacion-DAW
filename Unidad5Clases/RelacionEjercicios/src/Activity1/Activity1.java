@@ -35,7 +35,7 @@ public class Activity1 {
             fileOne = MCFile.askFile("./");
 
             if ( !MCFile.isTextFile(fileOne)) {
-                System.out.println("El archivo 1 tiene que ser de formato texto");
+                System.out.println("El archivo 1 tiene que ser de formato texto(.txt)");
                 return;
             }
 
@@ -45,7 +45,7 @@ public class Activity1 {
             fileTwo = MCFile.askFile("./");
 
             if ( !MCFile.isTextFile(fileTwo)) {
-                System.out.println("El archivo 2 tiene que ser de formato texto");
+                System.out.println("El archivo 2 tiene que ser de formato texto(.txt)");
                 return;
             }
 

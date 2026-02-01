@@ -1,4 +1,4 @@
-package Activity5;
+package Activity5.Old;
 
 public class UserNotFound extends RuntimeException {
     public UserNotFound() {

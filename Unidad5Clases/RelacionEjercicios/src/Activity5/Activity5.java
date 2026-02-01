@@ -1,8 +1,12 @@
 package Activity5;
 
+import Activity5.Old.Db;
+import Activity5.Old.User;
 import Utilities.MC;
 import Utilities.MCBox;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -13,66 +17,68 @@ import java.util.Scanner;
  * agotan las oportunidades el programa dirá “Lo siento, no tiene acceso al área restringida”. Los
  * nombres de usuario con sus correspondientes contraseñas deben estar almacenados en una
  * estructura de la clase HashMap leída de un fichero que tiene el formato línea a línea de usuario password.
+ *
+ * NOTA PARA PROFE: aqui dice usuarios, aunque me dijo que era solo un usuario
  */
 public class Activity5 {
 
-    static Db db;
     static Scanner sc = new Scanner(System.in);
 
     static void main() {
-        try
-        {
-           db = new Db();
-        }catch (Exception ex)
-        {
-            MC.title.outlineY("DB ERR: Archivo no encontrado");
-            return;
+        int tries = 0;
+
+        String user = null, password = null;
+
+        try{
+            Scanner fileScanner = new Scanner( new FileReader("src/Activity5/db.txt") );
+
+            if (fileScanner.hasNextLine()) {
+                String[] line = fileScanner.nextLine().split("-"); // se guarda como user-password
+
+                user = line[0];
+                password = line[1];
+            }
+        } catch (FileNotFoundException e) {
+            MC.title.outlineY("No se puede abrir el archivo");
+            throw new RuntimeException(e);
         }
 
-        askCredentials();
-    }
 
-    public static void askCredentials()
-    {
-        MCBox box = new MCBox();
+        boolean continuar = false;
 
-        box.add("Usuario:");
-        System.out.println("Ingrese su usuario");
-        String usuario = sc.nextLine();
+        do{
+            if ( tries >= 3 )
+            {
+                continuar = true;
+            }else{
+                System.out.println("Ingrese su usuario");
 
-        System.out.println("Ingrese su contraseña");
-        String password = sc.nextLine();
+                if ( sc.nextLine().equals(user) )
+                {
 
-        User user = db.getUser(usuario);
-        if( user == null )
+                    System.out.println("Ingrese su contraseña");
+                    if( sc.nextLine().equals(password) )
+                    {
+                        continuar = true;
+                    }else{
+                        tries++;
+                        System.out.println("Credenciales incorrectas. Intentos restantes: " + (3 - tries));
+                    }
+                }else{
+                    tries++;
+                    System.out.println("Credenciales incorrectas. Intentos restantes: " + (3 - tries));
+                }
+            }
+        }while ( !continuar );
+
+        if ( tries < 3 )
         {
-            MC.title.outlineY("Credenciales no son correctos");
-
-            return;
-        }
-
-        if ( user.getTries() >= 3 )
-        {
+            MC.title.outlineY("Ha accedido al área restringida");
+        }else{
             System.out.println("  ╔═══════╗");
             System.out.println("  ║  🔒   ║  Lo siento, no tiene acceso al área restringida");
             System.out.println("  ║       ║");
             System.out.println("  ╚═══════╝");
-            return;
         }
-
-        if ( !db.attempt(usuario, password) ) {
-            MC.title.outlineY("Credenciales no son correctos");
-
-            try{
-                db.consumeTry( usuario );
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            askCredentials();
-            return;
-        }
-
-        MC.title.outlineY("Ha accedido al área restringida");
     }
 }

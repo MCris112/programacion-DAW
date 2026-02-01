@@ -1,5 +1,7 @@
 package Activity4;
 
+import Utilities.Table;
+
 import java.util.ArrayList;
 
 public class Caja <T> {
@@ -41,5 +43,18 @@ public class Caja <T> {
     public int positionOf( T obj )
     {
         return lista.indexOf(obj);
+    }
+
+
+    public void print()
+    {
+        Table table = Table.instance().addRow("Lista");
+
+        for ( T nombre: this.lista )
+        {
+            table.addRow( nombre.toString() );
+        }
+
+        table.print();
     }
 }

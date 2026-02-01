@@ -12,33 +12,50 @@ public class Activity4 {
 
     static void main() {
 
-        Caja<String> nombres = new Caja<String>();
-
+        // Caja de nombres
         MC.title.outlineY("Caja de nombres");
-        nombres.add( "Aurora" );
-        nombres.add( "Nicolas" );
-        nombres.add( "Margio" );
-        nombres.add( "Adrian" );
-
-        showCaja(nombres);
+        Caja<String> nombres = new Caja<String>();
+        nombres.add("Aurora");
+        nombres.add("Nicolas");
+        nombres.add("Margio");
+        nombres.add("Adrian");
+        nombres.print();
 
         nombres.removeAt(2);
+        nombres.print();
 
-        showCaja(nombres);
+        // EJEMPLO 2: Caja de enteros (notas)
+        MC.title.outlineY("Caja de notas");
+        Caja<Integer> notas = new Caja<Integer>();
+        notas.add(7);
+        notas.add(8);
+        notas.add(5);
+        notas.add(9);
+        nombres.print();
 
-        // TODO: Añadir mas ejemplos
+        notas.remove(5);  // Elimina el primer 5
+        notas.print();
 
+        // EJEMPLO 3: Caja de dobles (precios)
+        MC.title.outlineY("Caja de precios");
+        Caja<Double> precios = new Caja<Double>();
+        precios.add(19.99);
+        precios.add(45.50);
+        precios.add(12.75);
+        precios.print();
+
+        // Usar get() y positionOf()
+        System.out.println("Precio en posición 1: " + precios.get(1));
+        System.out.println("Posición de 12.75: " + precios.positionOf(12.75));
+
+        // EJEMPLO 4: Caja de booleanos
+        MC.title.outlineY("Caja de booleanos");
+        Caja<Boolean> estados = new Caja<Boolean>();
+        estados.add(true);
+        estados.add(false);
+        estados.add(true);
+        estados.add(false);
+        estados.print();
     }
 
-    public static <T> void showCaja( Caja<T> caja)
-    {
-        Table tableNombres = Table.instance().addRow("Lista");
-
-        for ( T nombre: caja.getLista() )
-        {
-            tableNombres.addRow( nombre.toString() );
-        }
-
-        tableNombres.print();
-    }
 }

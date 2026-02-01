@@ -1,4 +1,4 @@
-package Activity5;
+package Activity5.Old;
 
 import java.io.*;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Db {
 
-    static String path = "src/Activity5/db.txt";
+    static String path = "src/Activity5/Old/db.txt";
 
     Map<String, User> users = new HashMap<>();
 

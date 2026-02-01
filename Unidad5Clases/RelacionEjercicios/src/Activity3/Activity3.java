@@ -39,6 +39,12 @@ public class Activity3 {
 
         Map<String, Integer> db = new HashMap<>();
 
+        // Dejar los valores por defecto
+        db.put("Suspenso", 0);
+        db.put("Aprobado", 0);
+        db.put("Notable", 0);
+        db.put("Sobresaliente", 0);
+
         try {
             JSONParser parser = new JSONParser();
 
@@ -57,56 +63,44 @@ public class Activity3 {
                     media += (Long) numItem;
                 }
 
+                String status = getScoreStatusKey(media / notas.size());
+
                 db.put(
-                        (String) alumno.get("nombre"), // Obtener el nombre
-                        media / notas.size() // calcular la media
+                        status, // Obtener el nombre
+                        db.get(status)+1
                 );
             }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-
+        // Mostrar los resultados en la consola
         Table table = Table.instance()
-                .addRow("Nombre", "Nota Final", "Estado");
+                .addRow("Estado", "Cantidad");
 
-        int suspensos = 0, aprovados = 0, notables = 0, sobresalientes = 0;
-
-        for (Map.Entry<String, Integer> entry : db.entrySet()) {
-            int nota = entry.getValue();
-
-            // suspensos, aprobados, notable y sobresalientes
-            String eval = "Suspenso";
-            if (nota >= 5 && nota < 7) {
-                eval = "Aprobado";
-                aprovados +=1;
-            } else if (nota >= 7 && nota < 9) {
-                eval = "Notable";
-                notables++;
-            } else if (nota >= 9) {
-                eval = "Sobresaliente";
-                aprovados++;
-            }else{
-                suspensos++;
-            }
-
-            table.addRow( entry.getKey(), nota+"", eval );
+        for ( String key : db.keySet() )
+        {
+            table.addRow( key, db.get(key) + "" );
         }
 
         table.print();
+    }
 
-        Table.instance()
-            .addRow("Estadistica")
-            .addRow("Estado", "Totales")
-            .addRow("Suspenso", String.valueOf(suspensos))
-            .addRow("Aprobados", String.valueOf(aprovados))
-            .addRow("Notables", String.valueOf(notables))
-            .addRow("Sobresalientes", String.valueOf(sobresalientes))
-                .print();
+    public static String getScoreStatusKey( int nota )
+    {
+        if (nota >= 5 && nota < 7) {
+            return "Aprobado";
+        }
+
+        if (nota >= 7 && nota < 9) {
+            return "Notable";
+        }
+
+        if (nota >= 9) {
+            return "Sobresaliente";
+        }
+
+        return "Suspenso";
     }
 }
