@@ -1,0 +1,2 @@
+jugador1=3
+jugador2=2

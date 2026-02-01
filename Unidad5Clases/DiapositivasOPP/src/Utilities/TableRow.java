@@ -31,7 +31,11 @@ public class TableRow {
      */
     public int getWidthAt(int pos)
     {
-        return this.columns[pos].length();
+        try{
+            return this.columns[pos].length();
+        }catch (NullPointerException e){
+            return 0;
+        }
     }
 
     public void print(ArrayList<Integer> widths, int expectedCols) {
