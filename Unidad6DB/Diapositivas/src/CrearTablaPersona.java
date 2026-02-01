@@ -1,15 +1,14 @@
 
 
-import DB.Schema.Schema;
-
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 public class CrearTablaPersona {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, SQLException {
         // SQL para crear tabla persona
 
-
+        User.query(User.class).get();
 
         String sql = "CREATE TABLE IF NOT EXISTS persona (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY, " +

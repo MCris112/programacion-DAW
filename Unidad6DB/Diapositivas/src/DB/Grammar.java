@@ -54,21 +54,21 @@ public class Grammar implements SqlAction{
 
     public String compileWheres(String sql)
     {
-        for (int i = 0; i < query.getWheres().size(); i++) {
-            Where where = query.getWheres().get(i);
-
-            if ( i != 0)
-            {
-                sql += where.getBoolean()+" ";
-            }else{
-                sql += " WHERE ";
-            }
-
-            sql += where.getColumn()+" "+where.getComparator()+" ? ";
-
-            this.bindings.add( new Binding((String) where.getValue()) );
-        }
-
+//        for (int i = 0; i < query.getWheres().size(); i++) {
+//            Where where = query.getWheres().get(i);
+//
+//            if ( i != 0)
+//            {
+//                sql += where.getBoolean()+" ";
+//            }else{
+//                sql += " WHERE ";
+//            }
+//
+//            sql += where.getColumn()+" "+where.getComparator()+" ? ";
+//
+//            this.bindings.add( new Binding((String) where.getValue()) );
+//        }
+//
         return sql;
     }
 

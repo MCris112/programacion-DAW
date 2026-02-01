@@ -20,31 +20,31 @@ public class Activity4 {
 
         MCList<Partido> partidos = null;
 
-        QueryBuilder query = QueryBuilder.db("partidos", new NbaName())
-                .where("puntos_local", ">", "100")
-                .where("temporada", "02/03")
-                .distinct();
-
-        System.out.println( query.toSql() );
-
-         try{
-             partidos = query.get(Partido.class);
-
-         } catch (Exception e) {
-             throw new RuntimeException(e);
-         }
-
-         if (partidos.isEmpty()) {
-             return;
-         }
-
-        Table table = Table.instance().addRow( "Equipo Local");
-
-        for ( Partido jugador : partidos )
-        {
-            table.addRow( jugador.getEquipoLocal() );
-        }
-
-        table.print();
+//        QueryBuilder query = QueryBuilder.db("partidos", new NbaName())
+//                .where("puntos_local", ">", "100")
+//                .where("temporada", "02/03")
+//                .distinct();
+//
+//        System.out.println( query.toSql() );
+//
+//         try{
+//             partidos = query.get(Partido.class);
+//
+//         } catch (Exception e) {
+//             throw new RuntimeException(e);
+//         }
+//
+//         if (partidos.isEmpty()) {
+//             return;
+//         }
+//
+//        Table table = Table.instance().addRow( "Equipo Local");
+//
+//        for ( Partido jugador : partidos )
+//        {
+//            table.addRow( jugador.getEquipoLocal() );
+//        }
+//
+//        table.print();
     }
 }

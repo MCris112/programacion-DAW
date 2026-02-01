@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryBuilder implements SqlAction{
+public class  QueryBuilder<M extends  Model> implements SqlAction{
 
     protected MCConnection connection;
 
@@ -23,15 +23,12 @@ public class QueryBuilder implements SqlAction{
 
     protected boolean isDistinct = false;
 
-    public QueryBuilder(String table, MCConnection connection) {
-        this.connection = connection;
-        this.tableName = table;
+    protected M model;
+
+    public QueryBuilder(M model) {
+        this.model = model;
 
         this.grammar = new Grammar( this );
-    }
-
-    public static QueryBuilder db(String table, MCConnection connection) {
-        return new QueryBuilder(table, connection);
     }
 
     public QueryBuilder where( String column, String value)
@@ -58,13 +55,13 @@ public class QueryBuilder implements SqlAction{
         return this;
     }
 
-    public <M extends  Model> MCList<M> get(Class<M> modelClass) throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public MCList<M> get() throws SQLException {
         ResultSet result = this.connection.executeRaw( this.grammar.compileSelec(), this.grammar.getBindings() );
 
         MCList<M> models = new MCList<M>();
         while( result.next() )
         {
-            M model = modelClass.getDeclaredConstructor().newInstance();
+            M model = (M) this.model.newModel();
             model.fromSqlResult(result);
             models.add( model );
         }

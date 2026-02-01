@@ -2,7 +2,7 @@ package Activities.Activity4;
 
 import DB.Model;
 
-public class Partido extends Model {
+public class Partido {
 
     protected int codigo;
 

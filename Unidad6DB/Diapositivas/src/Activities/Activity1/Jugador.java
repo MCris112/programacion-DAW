@@ -2,7 +2,7 @@ package Activities.Activity1;
 
 import DB.Model;
 
-public class Jugador extends Model {
+public class Jugador {
 
     protected int codigo;
 
@@ -56,4 +56,5 @@ public class Jugador extends Model {
                 ", nombreEquipo='" + nombreEquipo + '\'' +
                 '}';
     }
+
 }

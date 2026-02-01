@@ -1,5 +1,7 @@
 package Env;
 
+import Utilities.Table;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,8 +17,12 @@ public class Env {
 
     public EnvDatabase database;
 
-    public Env() throws FileNotFoundException {
-        this.load();
+    public Env() {
+        try{
+            this.load();
+        }catch(FileNotFoundException e){
+            System.out.println("\u001B[31mNo se encontró el archivo .env\u001B[0m");
+        }
     }
 
     public void load() throws FileNotFoundException {
@@ -27,10 +33,10 @@ public class Env {
             String line = sc.nextLine();
 
             // OMITIR COMENTARIOS
-            if ( line.startsWith("#") ) {
-                return;
-            }
+            if ( line.startsWith("#") || line.isEmpty() )
+                continue;
 
+            System.out.println(line.split("=")[0] + " = "+ line.split("=")[1]);
             this.raw.put(line.split("=")[0], line.split("=")[1]);
         }
 
@@ -41,6 +47,18 @@ public class Env {
                 this.raw.get("DB_USERNAME"),
                 this.raw.get("DB_PASSWORD")
         );
+    }
+
+    public void print()
+    {
+        Table.instance()
+                .addRow("PATH: ", new File(ENV_PATH).getAbsolutePath())
+                .addRow("DB_DATABASE: ", this.raw.get("DB_DATABASE"))
+                .addRow("DB_HOST: ", this.raw.get("DB_HOST"))
+                .addRow("DB_PORT: ", this.raw.get("DB_PORT"))
+                .addRow("DB_USERNAME: ", this.raw.get("DB_USERNAME"))
+                .addRow("DB_PASSWORD: ", this.raw.get("DB_PASSWORD"))
+                .print();
     }
 
 }

@@ -8,7 +8,22 @@ import java.lang.reflect.Field;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public abstract class Model {
+public abstract class Model<M extends Model<M>> {
+
+
+    abstract public String getTableName();
+
+
+
+
+
+
+    protected QueryBuilder<? extends Model<?>> query;
+
+    @SuppressWarnings("unchecked")
+    public Model() {
+        this.query = (QueryBuilder<M>) new QueryBuilder(this);
+    }
 
     private String toCamelCase(String columnName) {
         String[] parts = columnName.toLowerCase().split("_");
@@ -22,6 +37,22 @@ public abstract class Model {
             }
         }
         return camel.toString();
+    }
+
+    protected abstract M newModel();
+
+    @SuppressWarnings("unchecked")
+    public QueryBuilder<M> query() {
+        return (QueryBuilder<M>) query;
+    }
+
+    public static <M extends Model> QueryBuilder query(Class<M> modelClass) {
+        try {
+            M instance = (M) modelClass.getDeclaredConstructor().newInstance();
+            return instance.query();
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot create " + modelClass.getSimpleName(), e);
+        }
     }
 
     public void fromSqlResult(ResultSet result) throws SQLException {
