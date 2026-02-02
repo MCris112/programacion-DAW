@@ -36,7 +36,6 @@ public class Env {
             if ( line.startsWith("#") || line.isEmpty() )
                 continue;
 
-            System.out.println(line.split("=")[0] + " = "+ line.split("=")[1]);
             this.raw.put(line.split("=")[0], line.split("=")[1]);
         }
 

@@ -25,8 +25,8 @@ public class EnvDatabase {
         return host;
     }
 
-    public int getPort() {
-        return port;
+    public String getPort() {
+        return port+""; // TODO: Fix port to string
     }
 
     public String getUsername() {

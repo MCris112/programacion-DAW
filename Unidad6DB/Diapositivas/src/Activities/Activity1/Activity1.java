@@ -1,7 +1,6 @@
 package Activities.Activity1;
 
 import DB.QueryBuilder;
-import Databases.NbaName;
 import Utilities.Table;
 
 import java.sql.SQLException;

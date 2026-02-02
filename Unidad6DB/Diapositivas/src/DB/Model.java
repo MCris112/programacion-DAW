@@ -1,5 +1,6 @@
 package DB;
 
+import DB.Contracts.DatabaseEnv;
 import DB.Exceptions.CannotSetAttributeOnModel;
 
 import java.sql.ResultSet;
@@ -8,15 +9,7 @@ import java.lang.reflect.Field;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public abstract class Model<M extends Model<M>> {
-
-
-    abstract public String getTableName();
-
-
-
-
-
+public abstract class Model<M extends Model<M>> implements DatabaseEnv {
 
     protected QueryBuilder<? extends Model<?>> query;
 

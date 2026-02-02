@@ -1,6 +1,7 @@
 package DB;
 
 import Activities.Activity1.Jugador;
+import DB.Contracts.DatabaseEnv;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  QueryBuilder<M extends  Model> implements SqlAction{
+public class  QueryBuilder<M extends  Model> implements SqlAction, DatabaseEnv {
 
     protected MCConnection connection;
 
@@ -25,13 +26,53 @@ public class  QueryBuilder<M extends  Model> implements SqlAction{
 
     protected M model;
 
+
     public QueryBuilder(M model) {
         this.model = model;
+        this.connection = new MCConnection(
+                this.getDatabaseName(),
+                this.getTableName(),
+                this.getDatabasePort(),
+                this.getDatabaseUserName(),
+                this.getDatabaseUserPassword()
+        );
 
         this.grammar = new Grammar( this );
     }
 
-    public QueryBuilder where( String column, String value)
+
+    /// ///////////////////////////////////////
+    ///
+    /// Database Configuration
+    ///
+    /// ///////////////////////////////////////
+
+    @Override
+    public String getDatabaseName() {
+        return this.model.getDatabaseName();
+    }
+
+    @Override
+    public String getDatabasePort() {
+        return this.model.getDatabasePort();
+    }
+
+    @Override
+    public String getDatabaseUserName() {
+        return this.model.getDatabaseUserName();
+    }
+
+    @Override
+    public String getDatabaseUserPassword() {
+        return this.model.getDatabaseUserPassword();
+    }
+
+    @Override
+    public String getTableName() {
+        return this.model.getTableName();
+    }
+
+    public QueryBuilder where(String column, String value)
     {
         this.wheres.add( new Where( column, "=", value, "AND"  ) );
         return this;
@@ -72,10 +113,6 @@ public class  QueryBuilder<M extends  Model> implements SqlAction{
     @Override
     public String toSql() {
         return this.grammar.toSql();
-    }
-
-    public String getTableName() {
-        return tableName;
     }
 
     public ArrayList<String> getColumns() {
