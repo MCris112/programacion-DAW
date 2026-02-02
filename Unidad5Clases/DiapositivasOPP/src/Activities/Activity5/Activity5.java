@@ -4,6 +4,7 @@ import Utilities.Table;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -16,16 +17,16 @@ import java.util.Scanner;
  */
 public class Activity5 {
 
+    public static String PATH = "src/Activities/Activity5/students.csv";
     static Scanner sc = new Scanner(System.in);
 
     static ArrayList<String> headers = new ArrayList<>();
     static ArrayList<Student> students = new ArrayList<>();
 
     static void main() {
-        File file = new File("src/Activities/Activity5/students.csv");
 
         try {
-            Scanner reader = new Scanner(file);
+            Scanner reader = new Scanner( new File(PATH) );
 
             int position = 0;
             while ( reader.hasNextLine() ){
@@ -120,11 +121,5 @@ public class Activity5 {
         } catch (FileNotFoundException e) {
             System.out.println("No se pudo escribir en el fichero.");
         }
-    }
-
-
-    private static void read()
-    {
-
     }
 }

@@ -39,6 +39,11 @@ public class Pila<T> {
         return true;
     }
 
+    public boolean estaVacia()
+    {
+        return this.valores.isEmpty();
+    }
+
     @Override
     public String toString() {
         String endText = "";

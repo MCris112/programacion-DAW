@@ -12,6 +12,11 @@ public class Activity11 {
     static void main() {
         Pila<Integer> pila = new Pila<>();
 
+        if ( pila.estaVacia() )
+        {
+            System.out.println("Pila vacia");
+        }
+
         pila.insertar(10);
         pila.insertar(20);
         pila.insertar(5);

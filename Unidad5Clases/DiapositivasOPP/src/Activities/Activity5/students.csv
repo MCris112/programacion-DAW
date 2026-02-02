@@ -1,5 +1,5 @@
 id,first_name,last_name,email,grade,group,birth_date
-1,Lucía,García,lucia.garcia@example.com,1,ESO-A,2009-03-15
+1,Lucía,Garcia2,lucia.garcia@example.com,1,ESO-A,2009-03-15
 2,Carlos,López,carlos.lopez@example.com,1,ESO-A,2009-07-02
 3,María,Sánchez,maria.sanchez@example.com,2,ESO-B,2008-11-21
 4,Javier,Ruiz,javier.ruiz@example.com,2,ESO-B,2008-01-09
@@ -49,4 +49,5 @@ id,first_name,last_name,email,grade,group,birth_date
 48,Ferrán,Lara,ferran.lara@example.com,4,ESO-A,2006-09-20
 49,Marta,Nuñez,marta.nunez@example.com,1,BACH-A,2005-12-18
 50,Erik,Sierra,erik.sierra@example.com,2,BACH-B,2004-05-04
-3,sdfgsdf,sdf,sdfsdf,sdfs,sdf,sdfsdf
+51,Domingo,1,sdfsdf,sdfs,sdf,sdfsdf
+52,cristopher,quiñones,quinonesvillanueva@gmail.com,DAW,DAW,2003-08-30

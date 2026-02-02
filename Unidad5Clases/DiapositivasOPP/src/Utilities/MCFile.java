@@ -108,4 +108,44 @@ public class MCFile {
         }
         return fileName;
     }
+
+    public static boolean isCharacterFile(File file) {
+        if (!file.exists() || !file.isFile()) {
+            return false;
+        }
+
+        try {
+            String mimeType = Files.probeContentType(file.toPath());
+
+            if (mimeType == null) {
+                // Si no detecta, verificar por extensión
+                String fileName = file.getName().toLowerCase();
+                String[] textExtensions = {
+                        ".txt", ".csv", ".json", ".xml", ".html", ".htm",
+                        ".md", ".log", ".java", ".js", ".py", ".c", ".cpp",
+                        ".properties", ".yml", ".yaml", ".ini", ".cfg", ".php", ".config", ".env", ".env.example",
+                        ".conf", ".prop"
+                };
+
+                for (String ext : textExtensions) {
+                    if (fileName.endsWith(ext)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            // Verificar si el MIME type indica texto
+            return mimeType.startsWith("text/") ||
+                    mimeType.equals("application/json") ||
+                    mimeType.equals("application/xml") ||
+                    mimeType.equals("application/csv");
+
+        } catch (IOException e) {
+            return false;
+        }
+
+    }
+
 }

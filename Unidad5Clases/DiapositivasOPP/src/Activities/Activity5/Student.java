@@ -1,6 +1,7 @@
 package Activities.Activity5;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Student {
 
@@ -12,5 +13,16 @@ public class Student {
 
     public String[] getData() {
         return data;
+    }
+
+    public void setValueOn( int index, String value) {
+        this.data[index] = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "data=" + Arrays.toString(data) +
+                '}';
     }
 }

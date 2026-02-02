@@ -22,11 +22,11 @@ public class Activity3 {
 
         File file = new File("src/Activities/Activity3/tale.txt");
         // Scanner para leer el fichero línea a línea
-        try (Scanner lector = new Scanner(file)) { // [web:13][web:16]
+        try (Scanner lector = new Scanner(file)) {
             while (lector.hasNextLine()) {
                 String linea = lector.nextLine();
                 // separar por uno o varios espacios en blanco
-                String[] palabras = linea.split("\\s+"); // [web:10]
+                String[] palabras = linea.split("\\s+");
                 for (String p : palabras) {
                     if (p.equalsIgnoreCase(word) || p.equalsIgnoreCase(word + ",")) {
                         counter++;
