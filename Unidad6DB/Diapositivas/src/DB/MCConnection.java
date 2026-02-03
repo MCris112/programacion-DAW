@@ -77,13 +77,23 @@ public  class MCConnection implements DatabaseEnv {
         Connection conn = getConnection();
         PreparedStatement ps = conn.prepareStatement(sql);
 
-        System.out.println(bindings.toString());
         for (int i = 0; i < bindings.size(); i++) {
             bindings.get(i).prepare(i + 1, ps);
 
         }
 
         return ps.executeQuery();
+    }
+
+    public void execute(String sql, ArrayList<Binding> bindings) throws SQLException {
+        Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        for (int i = 0; i < bindings.size(); i++) {
+            bindings.get(i).prepare(i + 1, ps);
+        }
+
+        ps.execute();
     }
 
     public static MCConnection instance(Class<? extends MCConnection> clazz) throws Exception {

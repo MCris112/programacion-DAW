@@ -36,7 +36,15 @@ public class Env {
             if ( line.startsWith("#") || line.isEmpty() )
                 continue;
 
-            this.raw.put(line.split("=")[0], line.split("=")[1]);
+            String[] data = line.split("=");
+
+            // Para poder manejar valores nulos
+            String value = "";
+            if (data.length > 1){
+                value =  data[1];
+            }
+
+            this.raw.put(data[0], value );
         }
 
         this.database = new EnvDatabase(

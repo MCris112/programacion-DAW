@@ -1,5 +1,8 @@
 
 
+import DB.MCList;
+import DB.Schema.Schema;
+
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
@@ -8,7 +11,20 @@ public class CrearTablaPersona {
     public static void main(String[] args) throws FileNotFoundException, SQLException {
         // SQL para crear tabla persona
 
-        User.query(User.class).get();
+//        User.query(User.class).get();
+
+        User user = new User();
+
+        user.setName("Nicolas");
+        user.save();
+//
+//        MCList<User> users = new User().query().get();
+//
+//        for (User u : users) {
+//            System.out.println(u.getName());
+//
+//            u.setName("Antonio");
+//        }
 
         String sql = "CREATE TABLE IF NOT EXISTS persona (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -18,7 +34,7 @@ public class CrearTablaPersona {
 
 
 //        try {
-//            Schema.create("persona_tres", table -> {
+//            Schema.create("personas", table -> {
 //                table.id();
 //                table.varchar("nombre", 100).notNull().defaultVal("Algo");
 //                table.varchar("email", 100);

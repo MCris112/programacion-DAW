@@ -5,6 +5,7 @@ import DB.MCConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class Schema {
@@ -15,14 +16,21 @@ public class Schema {
         this.connection = connection;
     }
 
-    public void create(String name , Consumer<DBTable> table ) throws SQLException {
+//    public void create(String name , Consumer<DBTable> table ) throws SQLException {
+//        DBTable content = new DBTable(name, false);
+//        table.accept(content);
+//
+//        executeDdl( content.toString() );
+//    }
+
+    public static void create(String name , Consumer<DBTable> table ) throws SQLException {
         DBTable content = new DBTable(name, false);
         table.accept(content);
 
-        executeDdl( content.toString() );
+        new MCConnection().execute( content.toString(), new ArrayList<>() );
     }
 
-//    public static void create(String name , Consumer<DBTable> table ) throws SQLException {
+    //    public static void create(String name , Consumer<DBTable> table ) throws SQLException {
 //        DBTable content = new DBTable(name, false);
 //        table.accept(content);
 //

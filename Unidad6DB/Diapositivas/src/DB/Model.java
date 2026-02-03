@@ -87,4 +87,13 @@ public abstract class Model<M extends Model<M>> implements DatabaseEnv {
         }
         return null;
     }
+
+
+
+
+
+    public boolean save()
+    {
+        return true;
+    }
 }
