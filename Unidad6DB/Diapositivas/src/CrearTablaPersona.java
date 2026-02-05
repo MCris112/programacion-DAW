@@ -1,7 +1,4 @@
-
-
-import DB.MCList;
-import DB.Schema.Schema;
+import com.darkredgm.querymc.Env.Env;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -9,14 +6,12 @@ import java.sql.SQLException;
 public class CrearTablaPersona {
 
     public static void main(String[] args) throws FileNotFoundException, SQLException {
+
+        System.out.println( new Env().whereAmI());
         // SQL para crear tabla persona
 
 //        User.query(User.class).get();
 
-        User user = new User();
-
-        user.setName("Nicolas");
-        user.save();
 //
 //        MCList<User> users = new User().query().get();
 //

@@ -1,10 +1,5 @@
 package Activities.Activity1;
 
-import DB.QueryBuilder;
-import Utilities.Table;
-
-import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Muestra los jugadores españoles que son de los Lakers

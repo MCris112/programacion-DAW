@@ -1,6 +1,5 @@
 package Activities.Activity4;
 
-import DB.Model;
 
 public class Partido {
 

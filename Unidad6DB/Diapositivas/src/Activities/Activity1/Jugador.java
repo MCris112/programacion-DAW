@@ -1,6 +1,5 @@
 package Activities.Activity1;
 
-import DB.Model;
 
 public class Jugador {
 

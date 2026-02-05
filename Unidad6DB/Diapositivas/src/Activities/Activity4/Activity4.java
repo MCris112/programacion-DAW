@@ -1,13 +1,7 @@
 package Activities.Activity4;
 
-import Activities.Activity1.Jugador;
-import DB.MCList;
-import DB.QueryBuilder;
-import Utilities.Table;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
-import java.util.List;
+import com.darkredgm.querymc.Collections.MCList;
 
 /**
  * select distinct equipo_local from partidos where puntos_local > 100
@@ -17,7 +11,7 @@ public class Activity4 {
 
     static void main() {
 
-        MCList<Partido> partidos = null;
+//        MCList<Partido> partidos = null;
 
 //        QueryBuilder query = QueryBuilder.db("partidos", new NbaName())
 //                .where("puntos_local", ">", "100")
