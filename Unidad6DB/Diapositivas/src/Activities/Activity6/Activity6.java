@@ -3,6 +3,14 @@ package Activities.Activity6;
 
 import java.sql.SQLException;
 
+/**
+ * select jugadores.Nombre, estadisticas.temporada,
+ * estadisticas.Puntos_por_partido from jugadores,estadisticas where
+ * estadisticas.jugador=jugadores.codigo and
+ * (temporada,Puntos_por_partido) in (select
+ * temporada,max(Puntos_por_partido) from estadisticas group by
+ * temporada) order by estadisticas.temporada;
+ */
 public class Activity6 {
 //
 //    static DawDB dawDB = new DawDB();

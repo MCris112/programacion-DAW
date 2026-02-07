@@ -1,17 +1,30 @@
 package Activities.Activity1;
 
 
-public class Jugador {
+import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Database.Model;
 
+public class Jugador extends Model {
+
+    @DbColumn
     protected int codigo;
 
+    @DbColumn("Nombre")
     protected String nombre;
 
+    @DbColumn("Procedencia")
     protected String procedencia;
 
+    @DbColumn("Altura")
     protected String altura;
+
+    @DbColumn("Peso")
     protected int peso;
+
+    @DbColumn("Posicion")
     protected String posicion;
+
+    @DbColumn("Nombre_equipo")
     protected String nombreEquipo;
 
 
@@ -56,4 +69,9 @@ public class Jugador {
                 '}';
     }
 
+
+    @Override
+    public String getDatabaseName() {
+        return "nba";
+    }
 }
