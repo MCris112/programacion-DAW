@@ -83,4 +83,11 @@ public class BaseView {
             throw new RuntimeException(e);
         }
     }
+
+    public void show( Model model )
+    {
+        MCList<Model> models = new MCList<>();
+        models.add(model);
+        this.table( models );
+    }
 }

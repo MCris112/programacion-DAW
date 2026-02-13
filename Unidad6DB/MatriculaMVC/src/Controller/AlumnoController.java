@@ -1,10 +1,13 @@
 package Controller;
 
 import Core.BaseController;
+import Core.Service;
 import Models.Alumno;
 import com.darkredgm.querymc.Database.ORM.QueryBuilder;
+import com.darkredgm.utilitiesmc.MC;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class AlumnoController extends BaseController {
 
@@ -31,16 +34,26 @@ public class AlumnoController extends BaseController {
 
     @Override
     public void show() {
-        System.out.println("Show");
+        Alumno alumno = Service.getModel(Alumno.class);
+
+        if ( alumno != null )
+        {
+            this.view.show(alumno);
+        }
     }
 
     @Override
     public void update() {
-        System.out.println("Update");
+        Alumno alumno = Service.update(Alumno.class);
+
+        if ( alumno != null )
+        {
+            this.view.show(alumno);
+        }
     }
 
     @Override
     public void delete() {
-        System.out.println("Delete");
+        Service.delete(Alumno.class);
     }
 }
