@@ -1,9 +1,9 @@
 import Core.Service;
-import Models.Alumno;
 import Views.BaseView;
 import com.darkredgm.querymc.Collections.MCList;
 import com.darkredgm.querymc.Database.Model;
 import com.darkredgm.querymc.Database.ORM.QueryBuilder;
+import com.darkredgm.utilitiesmc.MC;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -15,18 +15,22 @@ public class Controller {
 
     public void index(Class<? extends Model> clazz)
     {
-       try{
-           MCList<?> models =  QueryBuilder.use(clazz).get();
+       try {
+
+           MCList<?> models =
+                    // El builder usa la clase del modelo y obtener todos de la base de datos
+                   QueryBuilder.use(clazz).get();
 
            this.view.table(models);
        }catch (SQLException e)
        {
-
+           MC.title.outlineY("SQL ERR!", e.getMessage() );
        }
     }
 
     public void store(Class<? extends Model> clazz)
     {
+        // Cargar la vista que se encarge de preguntar los attr del modelo
         this.view.fillModel(clazz);
     }
 
@@ -65,7 +69,11 @@ public class Controller {
 
         if ( sc.nextLine().equalsIgnoreCase("SI") )
         {
-            QueryBuilder.use(clazz).where(model.getKeyName(), model.getKeyValue());
+            try{
+                model.delete();
+            } catch (SQLException e) {
+                MC.title.outlineY("MYSQL ERROR", e.getMessage() );
+            }
             return;
         }
 

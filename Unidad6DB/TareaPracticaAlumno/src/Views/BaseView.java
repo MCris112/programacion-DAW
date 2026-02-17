@@ -60,20 +60,28 @@ public class BaseView {
         Scanner scanner = new Scanner( System.in );
 
         try{
+            // Se crea una nueva clase del modelo
             M model = (M)  modelClass.getConstructor().newInstance();
 
+            // Obtiene todos los atributos del modelo que están vinculados con la base de datos
             for ( ModelAttribute attribute: model.getFieldAttributes() )
             {
                 System.out.println("Inserte el valor ["+attribute.getName()+"]:");
 
                 String line = scanner.nextLine();
 
+                // Verificar los casos especiales porque tira error según el tipo que sea distinto
                 if ( !line.isEmpty() )
                 {
                     if ( attribute.asField().getType() == Integer.class || attribute.asField().getType() == int.class )
                     {
                         model.setAttribute(attribute.asField().getName(), Integer.parseInt(line));
-                    }else {
+                    }else if ( attribute.asField().getType() == Boolean.class || attribute.asField().getType() == boolean.class )
+                    {
+                        model.setAttribute(attribute.asField().getName(), Boolean.parseBoolean(line));
+                    } else if (attribute.asField().getType() == double.class || attribute.asField().getType() == Double.class) {
+                        model.setAttribute(attribute.asField().getName(), Double.parseDouble(line));
+                    } else {
                         model.setAttribute( attribute.getName(), line );
                     }
                 }

@@ -1,14 +1,8 @@
-import Database.Migration;
-import Models.Practica;
-import Models.Profesor;
+import Models.*;
 import com.darkredgm.querymc.Database.Model;
 import com.darkredgm.utilitiesmc.MC;
 import com.darkredgm.utilitiesmc.Table;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,61 +16,13 @@ public class App {
         this.models = loadModels();
     }
 
-    //
-//    ArrayList<BaseController> controllers = new  ArrayList<>();
-//
     public void init() throws SQLException {
-        Migration.load();
-
-
-//        try{
-//            loadControllers();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        System.out.println("\n".repeat(10));
-//
         this.showMenu();
     }
-//
-//    public void loadControllers() throws IOException {
-//        File controllersDir = new File("src/Controller");
-//        if (!controllersDir.exists()) {
-//            System.err.println("Directory not found: " + controllersDir.getAbsolutePath());
-//            return;
-//        }
-//
-//        URL[] urls = { controllersDir.toURI().toURL() };
-//        URLClassLoader loader = new URLClassLoader(urls, Thread.currentThread().getContextClassLoader());
-//
-//        File[] classFiles = controllersDir.listFiles((dir, name) -> name.endsWith(".class") || name.endsWith(".java") );
-//        System.out.println("Class files found: " + classFiles.length);
-//
-//        for (File cf : classFiles) {
-//            String simpleName = cf.getName().replace(".class", "").replace(".java", "");
-//            String fullClassName = "Controller." + simpleName;  // Adjust package if different
-//
-//            try {
-//                Class<?> cls = loader.loadClass(fullClassName);
-//                if (BaseController.class.isAssignableFrom(cls)) {
-//                    BaseController instance = (BaseController) cls.getDeclaredConstructor().newInstance();
-//                    controllers.add(instance);
-//                    System.out.println("Loaded controller: " + fullClassName);
-//                } else {
-//                    System.out.println("Skipping non-BaseController: " + fullClassName);
-//                }
-//            } catch (ClassNotFoundException e) {
-//                System.err.println("Class not found: " + fullClassName + " (check package/compile)");
-//                e.printStackTrace();
-//            } catch (Exception e) {  // Instantiation errors
-//                System.err.println("Failed to instantiate: " + fullClassName);
-//                e.printStackTrace();
-//            }
-//        }
-//        loader.close();  // Good practice
-//    }
-//
+
+    /**
+     * Muestra el menu principal de todos los modelos
+     */
     public void showMenu()
     {
         Table table = Table.instance().addRow("Opcion", "Nombre");
@@ -89,7 +35,6 @@ public class App {
 
         System.out.println("Seleccione una opción: ");
 
-        // TODO, ENTRA EN BUCLE CUANDO HAY ERROR
         if ( sc.hasNextInt() )
         {
             int opcion =  sc.nextInt() - 1;
@@ -100,6 +45,7 @@ public class App {
                 System.out.println("\n".repeat(10));
 
             }else{
+                // En caso que la opción sea correcta, mostrar el menu del modelo
                 showModelMenu( this.models.get(opcion) );
                 return;
             }
@@ -110,25 +56,36 @@ public class App {
             System.out.println("\n".repeat(10));
         }
 
+        sc.nextLine();
+
         showMenu();
     }
-//
+
+    /**
+     * Mostrar el menu en base al modelo seleccionado
+     * @param model
+     */
     public void showModelMenu( Class<? extends Model> model )
     {
+        // Mostrar todas los modelos principales como si fuera una api
         System.out.println("-".repeat(20));
-        System.out.println("1 - [GET] api/"+model.getSimpleName() );
-        System.out.println("2 - [POST] api/"+model.getSimpleName() );
-        System.out.println("3 - [SHOW] api/"+model.getSimpleName()+"/[id]" );
-        System.out.println("4 - [PUT] api/"+model.getSimpleName()+"/[id]" );
+        System.out.println("0 - Volver atrás " );
+        System.out.println("1 - [GET]    api/"+model.getSimpleName() );
+        System.out.println("2 - [POST]   api/"+model.getSimpleName() );
+        System.out.println("3 - [SHOW]   api/"+model.getSimpleName()+"/[id]" );
+        System.out.println("4 - [PUT]    api/"+model.getSimpleName()+"/[id]" );
         System.out.println("5 - [DELETE] api/"+model.getSimpleName() );
         System.out.println("-".repeat(20));
 
+        // Cargar el controlador único para usarse
         Controller controller = new Controller();
 
         if ( sc.hasNextInt() ) {
 
+            // Con base en la selección cargar lo que se necesita
             switch (sc.nextInt())
             {
+                case 0: showMenu(); return; //Bloquear el showModelMenu final
                 case 1: controller.index(model); break;
                 case 2: controller.store(model); break;
                 case 3: controller.show(model); break;
@@ -139,19 +96,30 @@ public class App {
                     break;
             }
 
-            sc.nextLine();
         }else{
             MC.title.outlineY("COLOQUE UNA OPCIÓN CORRECTA");
         }
 
+        sc.nextLine();
+
+        // Al finalizar volver al bucle del menu del modelo
         showModelMenu(model);
     }
 
 
+    /**
+     * Cargar los modelos existententes en el folder de modelos
+     * @return
+     */
     public ArrayList<Class<? extends Model>> loadModels() {
         ArrayList<Class<? extends Model>> models = new ArrayList<>();
+        models.add(Alumno.class);
         models.add(Practica.class);
         models.add(Profesor.class);
+        models.add(ExamenTeorico.class);
+        models.add(AlumnoHaceExamen.class);
+        models.add(AlumnoRealizaPractica.class);
+        models.add(ProfesorDisenaPractica.class);
 
         return models;
     }

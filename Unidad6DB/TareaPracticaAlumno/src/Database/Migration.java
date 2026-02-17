@@ -2,6 +2,7 @@ package Database;
 
 import Models.*;
 import com.darkredgm.querymc.Database.DB;
+import com.darkredgm.utilitiesmc.MC;
 
 import java.sql.SQLException;
 
@@ -27,5 +28,8 @@ public class Migration {
                 ExamenTeorico.class,
                 AlumnoHaceExamen.class
         );
+
+        MC.title.outlineY("MIGRATION LOADED!");
+        System.out.println("\n".repeat(20 ));
     }
 }
