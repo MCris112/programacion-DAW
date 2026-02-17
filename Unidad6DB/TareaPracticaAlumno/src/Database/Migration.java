@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 public class Migration {
 
+    /**
+     * Carga la base de datos nueva, junto a las tablas de cada modelo
+     * @throws SQLException
+     */
     public static void load() throws SQLException {
         try{
             DB.deleteDatabase("cristopher_tarea_mvc");
@@ -17,6 +21,7 @@ public class Migration {
 
         DB.createDatabase("cristopher_tarea_mvc");
 
+        // Verifica que las tablas de los modelos estén creadas y cargadas
         DB.verify(
                 Practica.class,
                 Alumno.class,
