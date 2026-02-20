@@ -1,4 +1,4 @@
-package Activities.Activity7;
+package Activities.Activity8;
 
 import com.darkredgm.querymc.Annotations.DBColPrimary;
 import com.darkredgm.querymc.Annotations.DbColumn;
@@ -72,6 +72,6 @@ public class Profesor extends Model {
 
     @Override
     public String getDatabaseName() {
-        return "mcris_er_alumno_examen";
+        return "mcris_er_alumno_matricula ";
     }
 }

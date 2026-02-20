@@ -1,3 +1,4 @@
+import com.darkredgm.querymc.Database.Schema.Schema;
 import com.darkredgm.querymc.Env.Env;
 
 import java.io.FileNotFoundException;
@@ -28,20 +29,20 @@ public class CrearTablaPersona {
                 ")";
 
 
-//        try {
-//            Schema.create("personas", table -> {
-//                table.id();
-//                table.varchar("nombre", 100).notNull().defaultVal("Algo");
-//                table.varchar("email", 100);
-//                table.date("fecha_nacimiento");
-//                table.intCol("persona_id");
-//                table.foreignKey("persona_id").references("persona_dos").on("id");
-//            });
-//
-//            System.out.println("Tabla persona creada correctamente");
-//        } catch (SQLException e) {
-//            System.err.println("Error al crear tabla: " + e.getMessage());
-//        }
+        try {
+            Schema.create("personas", table -> {
+                table.id();
+                table.varchar("nombre", 100).notNull().defaultVal("Algo");
+                table.varchar("email", 100);
+                table.date("fecha_nacimiento");
+                table.intCol("persona_id");
+                table.foreignKey("persona_id").references("persona_dos").on("id");
+            });
+
+            System.out.println("Tabla persona creada correctamente");
+        } catch (SQLException e) {
+            System.err.println("Error al crear tabla: " + e.getMessage());
+        }
     }
 
 

@@ -1,5 +1,7 @@
 package Activities.Activity7;
 
+import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.DBForeign;
 import com.darkredgm.querymc.Annotations.DbColumn;
 import com.darkredgm.querymc.Database.Model;
 
@@ -7,22 +9,27 @@ import java.sql.Date;
 
 public class ExamenTeorico extends Model {
 
+    @DBColPrimary
     @DbColumn
-    protected int id;
+    private int id;
 
     @DbColumn
-    protected String titulo;
+    private String titulo;
 
     @DbColumn
-    protected int numeroPreguntas;
+    private int numeroPreguntas;
 
     @DbColumn
-    protected Date fecha;
+    private String fecha;
+
+    @DBForeign(model = Profesor.class)
+    @DbColumn
+    private int profesorId;
 
     public ExamenTeorico() {
     }
 
-    public ExamenTeorico(String titulo, int numeroPreguntas, Date fecha) {
+    public ExamenTeorico(String titulo, int numeroPreguntas, String fecha) {
         this.titulo = titulo;
         this.numeroPreguntas = numeroPreguntas;
         this.fecha = fecha;
@@ -52,12 +59,20 @@ public class ExamenTeorico extends Model {
         this.numeroPreguntas = numeroPreguntas;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public int getProfesorId() {
+        return profesorId;
+    }
+
+    public void setProfesorId(int profesorId) {
+        this.profesorId = profesorId;
     }
 
     @Override
@@ -68,5 +83,10 @@ public class ExamenTeorico extends Model {
                 ", numeroPreguntas=" + numeroPreguntas +
                 ", fecha=" + fecha +
                 '}';
+    }
+
+    @Override
+    public String getDatabaseName() {
+        return "mcris_er_alumno_examen";
     }
 }

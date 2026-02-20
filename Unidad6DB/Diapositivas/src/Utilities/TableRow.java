@@ -1,18 +1,23 @@
 package Utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TableRow {
 
-    private String[] columns = {};
+    private ArrayList<String> columns = new ArrayList<>();
 
     public TableRow(String... columns) {
-        this.columns = columns;
+        this.columns.addAll(Arrays.asList(columns));
+    }
+
+    public void addColumn(String column) {
+        this.columns.add(column);
     }
 
     public int getWidth()
     {
-        return this.columns.length*15+1;
+        return this.columns.size()*15+1;
     }
 
     /**
@@ -21,7 +26,7 @@ public class TableRow {
      */
     public int count()
     {
-        return this.columns.length;
+        return this.columns.size();
     }
 
     /**
@@ -32,7 +37,7 @@ public class TableRow {
     public int getWidthAt(int pos)
     {
         try{
-            return this.columns[pos].length();
+            return this.columns.get(pos).length();
         }catch (NullPointerException e){
             return 0;
         }
@@ -41,10 +46,10 @@ public class TableRow {
     public void print(ArrayList<Integer> widths, int expectedCols) {
         System.out.print("|");
         for (int i = 0; i < expectedCols; i++) {
-            String cell = (i < columns.length) ? columns[i] : "";
+            String cell = (i < columns.size()) ? columns.get(i) : "";
 
             // Si es la última columna de esta fila (según lo que realmente tiene)
-            if (i == columns.length - 1 && columns.length < expectedCols) {
+            if (i == columns.size() - 1 && columns.size() < expectedCols) {
                 // calcular espacio restante
                 int remaining = 0;
                 for (int j = i; j < expectedCols; j++) {

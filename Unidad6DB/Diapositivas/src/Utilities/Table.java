@@ -20,6 +20,13 @@ public class Table {
         return new Table();
     }
 
+    public Table addRow(TableRow row)
+    {
+        rows.add( row );
+
+        return this;
+    }
+
     public Table addRow(String... text)
     {
         rows.add( new TableRow(text) );
