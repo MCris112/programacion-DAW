@@ -7,6 +7,15 @@ import javax.swing.*;
 public class PanelField {
 
     private JTextField field;
+    private JComboBox jSelector;
+
+
+//    public static PanelField from(ModelAttribute attribute)
+//    {
+//
+//
+//        return field;
+//    }
 
     public PanelField(JTextField field) {
         this.field = field;
