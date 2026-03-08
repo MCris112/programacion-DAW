@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 /**
  * Modifica el jugador 666 para que ponga bien su Procedencia
+ * Diapositiva 18
  */
 public class Activity2 {
 

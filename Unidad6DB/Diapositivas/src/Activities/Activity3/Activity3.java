@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 /**
  * Inserta un registro en jugadores y bórralo
+ * Diapositiva 18
  */
 public class Activity3 {
 

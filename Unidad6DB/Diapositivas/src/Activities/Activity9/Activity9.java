@@ -7,6 +7,10 @@ import com.darkredgm.querymc.Database.Model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ *
+ * Diapositiva 27
+ */
 public class Activity9 {
 
     public static void main(String[] args) {
@@ -48,7 +52,6 @@ public class Activity9 {
 //            edicionJava.save();
 //            models.add(edicionJava);
 
-            // ¡Mostrar todo!
             ModelHelper.show(models);
 
         } catch (SQLException e) {

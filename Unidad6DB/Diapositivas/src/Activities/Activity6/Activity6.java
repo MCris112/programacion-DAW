@@ -4,12 +4,15 @@ package Activities.Activity6;
 import java.sql.SQLException;
 
 /**
+ * TODO
  * select jugadores.Nombre, estadisticas.temporada,
  * estadisticas.Puntos_por_partido from jugadores,estadisticas where
  * estadisticas.jugador=jugadores.codigo and
  * (temporada,Puntos_por_partido) in (select
  * temporada,max(Puntos_por_partido) from estadisticas group by
  * temporada) order by estadisticas.temporada;
+ *
+ * Diapositiva 18
  */
 public class Activity6 {
 //

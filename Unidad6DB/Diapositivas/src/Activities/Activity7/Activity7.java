@@ -10,6 +10,8 @@ import java.util.ArrayList;
 /**
  * Realiza los siguientes diagramas E-R en JAVA y
  * haz pruebas que muestren su acceso y funcionamiento.
+ *
+ * Diapositiva 25
  */
 public class Activity7 {
 

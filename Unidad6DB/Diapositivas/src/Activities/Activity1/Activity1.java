@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 /**
  * Muestra los jugadores españoles que son de los Lakers
+ * Diapositiva 18
  */
 public class Activity1 {
 

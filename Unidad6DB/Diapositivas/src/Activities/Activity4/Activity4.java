@@ -4,8 +4,11 @@ package Activities.Activity4;
 import com.darkredgm.querymc.Collections.MCList;
 
 /**
+ * TODO
  * select distinct equipo_local from partidos where puntos_local > 100
  * and puntos_local > puntos_visitante and temporada='02/03'
+ *
+ * Diapositiva 18
  */
 public class Activity4 {
 
