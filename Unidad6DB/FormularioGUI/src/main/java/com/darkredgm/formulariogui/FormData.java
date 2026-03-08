@@ -4,10 +4,9 @@ public class FormData {
 
     private String nombre, telefono, direccion, genero, imageUrl, nacimiento;
 
-    public FormData(String nombre, String telefono, String direccion, String genero) {
+    public FormData(String nombre, String telefono, String genero) {
         this.nombre = nombre;
         this.telefono = telefono;
-        this.direccion = direccion;
         this.genero = genero;
     }
 
@@ -21,6 +20,10 @@ public class FormData {
 
     public String getDireccion() {
         return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getGenero() {
@@ -42,6 +45,8 @@ public class FormData {
     public void setNacimiento(String day, String month, String year) {
         this.nacimiento = "%s/%s/%s".formatted(day, month, year);
     }
+
+
 
     @Override
     public String toString() {

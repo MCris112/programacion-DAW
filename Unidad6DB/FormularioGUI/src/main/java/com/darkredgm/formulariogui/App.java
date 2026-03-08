@@ -6,8 +6,8 @@ package com.darkredgm.formulariogui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.net.MalformedURLException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -26,7 +26,7 @@ public class App extends javax.swing.JFrame {
      */
     public App() {
         initComponents();
-
+        setLocationRelativeTo(null);
         updateButtonStatus();
     }
 
@@ -207,7 +207,6 @@ public class App extends javax.swing.JFrame {
 
         fieldDay.setBackground(new java.awt.Color(255, 255, 255));
         fieldDay.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        fieldDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         fieldDay.setBorder(null);
 
         fieldMonth.setBackground(new java.awt.Color(255, 255, 255));
@@ -215,10 +214,25 @@ public class App extends javax.swing.JFrame {
         fieldMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
         fieldMonth.setBorder(null);
 
+        fieldMonth.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateDayField();
+            }
+        });
+
         fieldYear.setBackground(new java.awt.Color(255, 255, 255));
         fieldYear.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         fieldYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026" }));
         fieldYear.setBorder(null);
+        fieldYear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateDayField();
+            }
+        });
+
+        updateDayField();
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -264,11 +278,13 @@ public class App extends javax.swing.JFrame {
         fieldGender.add(optionMale);
         optionMale.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         optionMale.setText("Masculino");
+        optionMale.setActionCommand("Masculino");
 
         optionFemale.setBackground(new java.awt.Color(255, 255, 255));
         fieldGender.add(optionFemale);
         optionFemale.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         optionFemale.setText("Femenino");
+        optionFemale.setActionCommand("Femenino");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -461,6 +477,36 @@ public class App extends javax.swing.JFrame {
         }
     }
 
+    private void updateDayField() {
+        // 1. Get the current selection to restore it later if possible
+        Object selectedDay = fieldDay.getSelectedItem();
+
+        // 2. Parse Year and Month (Assuming Month is 1-12 or a String)
+        int year = Integer.parseInt(fieldYear.getSelectedItem().toString());
+
+        // Convert "Febrero" or month index to a month number
+        // getSelectedIndex() + 1 is easiest if the months are in order
+        int month = fieldMonth.getSelectedIndex() + 1;
+
+        // 3. Use YearMonth to find the correct number of days
+        java.time.YearMonth yearMonthObject = java.time.YearMonth.of(year, month);
+        int daysInMonth = yearMonthObject.lengthOfMonth();
+
+        // 4. Create the new model
+        String[] days = new String[daysInMonth];
+        for (int i = 0; i < daysInMonth; i++) {
+            days[i] = String.valueOf(i + 1);
+        }
+
+        // 5. Update the JComboBox
+        fieldDay.setModel(new javax.swing.DefaultComboBoxModel<>(days));
+
+        // 6. Try to preserve the previous selection (so it doesn't jump to 1 every time)
+        if (selectedDay != null && Integer.parseInt(selectedDay.toString()) <= daysInMonth) {
+            fieldDay.setSelectedItem(selectedDay);
+        }
+    }
+
     private boolean checkFieldStatus() {
         if (fieldName.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El nombre es obligatorio", "Error: Nombre", JOptionPane.ERROR_MESSAGE);
@@ -501,7 +547,6 @@ public class App extends javax.swing.JFrame {
         this.data = new FormData(
                 fieldName.getText(),
                 fieldNumber.getText(),
-                fieldDireccion.getText(),
                 fieldGender.getSelection().getActionCommand()
         );
 
@@ -531,9 +576,13 @@ public class App extends javax.swing.JFrame {
         this.data.setImageUrl( fieldImageUrl.getText().trim() );
 
         this.data.setNacimiento(
-                fieldDay.getActionCommand(),
-                fieldMonth.getActionCommand(),
-                fieldYear.getActionCommand()
+                fieldDay.getSelectedItem().toString(),
+                fieldMonth.getSelectedItem().toString(),
+                fieldYear.getSelectedItem().toString()
+        );
+
+        this.data.setDireccion(
+                fieldDireccion.getText()
         );
 
         new Confirmation( this, true, this.data).setVisible(true);
@@ -561,15 +610,29 @@ public class App extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldImageUrlActionPerformed
 
-    private void btnSelecImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecImageActionPerformed
+    private void btnSelecImageActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser fileChooser = new JFileChooser();
-        int seleccion = fileChooser.showDialog(this, "Seleccionar Imagen");
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-            File fichero = fileChooser.getSelectedFile();
 
+        // 1. Create the filter for image extensions
+        javax.swing.filechooser.FileNameExtensionFilter filter =
+                new javax.swing.filechooser.FileNameExtensionFilter(
+                        "Imágenes (jpg, png, gif, jpeg)", // Descripción para el usuario
+                        "jpg", "png", "gif", "jpeg"
+                );
+
+        // 2. Apply the filter to the file chooser
+        fileChooser.setFileFilter(filter);
+
+        // 3. Optional: Disable the "All Files" option to force image selection
+        fileChooser.setAcceptAllFileFilterUsed(false);
+
+        int seleccion = fileChooser.showDialog(this, "Seleccionar Imagen");
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            java.io.File fichero = fileChooser.getSelectedFile();
             fieldImageUrl.setText(fichero.getAbsolutePath());
         }
-    }//GEN-LAST:event_btnSelecImageActionPerformed
+    }
 
 
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed

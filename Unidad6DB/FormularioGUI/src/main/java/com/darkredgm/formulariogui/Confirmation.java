@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.darkredgm.formulariogui;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.net.URL;
 
 /**
  *
@@ -243,23 +236,35 @@ public class Confirmation extends javax.swing.JDialog {
 
     private void loadImageToLabel(String imageUrl) {
         try {
-            Image image;
-            if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
-                // Web URL
-                image = ImageIO.read(new URL(imageUrl));
+            ImageIcon icon;
+
+            // Verificar si es una url o bien una ruta de archivo
+            if (imageUrl.startsWith("http")) {
+                icon = new ImageIcon(new java.net.URL(imageUrl));
             } else {
-                // Local file path
-                image = ImageIO.read(new File(imageUrl));
+                icon = new ImageIcon(imageUrl);
             }
 
-            // Scale to fit label (350x150)
-            Image scaled = image.getScaledInstance(350, 150, Image.SCALE_SMOOTH);
-            imageLabel.setIcon(new ImageIcon(scaled));
-            imageLabel.setText("");  // Hide text
+            // Obtener dimensiones originales
+            int imgW = icon.getIconWidth();
+            int imgH = icon.getIconHeight();
+            int labelW = imageLabel.getWidth() > 0 ? imageLabel.getWidth() : 390;
+            int labelH = imageLabel.getHeight() > 0 ? imageLabel.getHeight() : 400;
+
+            // Calculamos la imagen para colocarlo como "contain" en css
+            double scale = Math.min((double) labelW / imgW, (double) labelH / imgH);
+            int finalW = (int) (imgW * scale);
+            int finalH = (int) (imgH * scale);
+
+            // Escalamos la imagen
+            Image scaledImage = icon.getImage().getScaledInstance(finalW, finalH, Image.SCALE_DEFAULT);
+
+            imageLabel.setIcon(new ImageIcon(scaledImage));
+            imageLabel.setText("");
+
         } catch (Exception e) {
-            imageLabel.setText("Imagen no disponible: " + e.getMessage());
+            imageLabel.setText("Error: " + e.getMessage());
             imageLabel.setIcon(null);
-            logger.log(java.util.logging.Level.WARNING, "Failed to load image: " + imageUrl, e);
         }
     }
 }
