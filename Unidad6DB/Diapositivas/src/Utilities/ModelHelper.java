@@ -1,5 +1,6 @@
 package Utilities;
 
+import com.darkredgm.querymc.Collections.MCList;
 import com.darkredgm.querymc.Database.Model;
 import com.darkredgm.querymc.Database.ModelAttribute;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class ModelHelper {
 
-    public static void show(List<Model> models )
+    public static void show(List<? extends Model> models )
     {
         for (Model m : models)
         {
@@ -16,6 +17,17 @@ public class ModelHelper {
             show(m);
         }
     }
+
+    public static void show(MCList<? extends Model> models )
+    {
+        for (Model m : models)
+        {
+            System.out.println("\n".repeat(5));
+
+            show(m);
+        }
+    }
+
 
     public static void show(Model model)
     {

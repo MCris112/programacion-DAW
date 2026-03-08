@@ -1,73 +1,47 @@
 package Activities.Activity6;
 
 
+import Activities.Activity1.Jugador;
+import Utilities.Table;
+import com.darkredgm.querymc.Collections.MCList;
+import com.darkredgm.querymc.Database.ORM.DB;
+import com.darkredgm.querymc.Database.ORM.QueryBuilder;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * TODO
  * select jugadores.Nombre, estadisticas.temporada,
  * estadisticas.Puntos_por_partido from jugadores,estadisticas where
  * estadisticas.jugador=jugadores.codigo and
  * (temporada,Puntos_por_partido) in (select
  * temporada,max(Puntos_por_partido) from estadisticas group by
  * temporada) order by estadisticas.temporada;
- *
  * Diapositiva 18
  */
 public class Activity6 {
-//
-//    static DawDB dawDB = new DawDB();
-//
-//    static void main() {
-//
-//        // crear las tablas
-//        createTables();
-//
-//
-//    }
-//
-//    /**
-//     * Toda la migración de crear tablas
-//     */
-//    public static void createTables()
-//    {
-//        try{
-//            dawDB.schema.dropIfExists("proveedores");
-//            dawDB.schema.createIfNotExists("proveedores", table -> {
-//                table.intCol("codigo").setPrimaryKey(true).autoIncrement();
-//                table.varchar("direccion", 100);
-//                table.varchar("ciudad", 100);
-//                table.varchar("provincia", 100);
-//            });
-//
-//            dawDB.schema.dropIfExists("categorias");
-//            dawDB.schema.createIfNotExists("categorias", table -> {
-//                table.intCol("codigo").setPrimaryKey(true).autoIncrement();
-//                table.varchar("direccion", 100);
-//            });
-//
-//            dawDB.schema.dropIfExists("piezas");
-//            dawDB.schema.createIfNotExists("piezas", table -> {
-//                table.intCol("codigo").setPrimaryKey(true).autoIncrement();
-//                table.varchar("nombre", 100);
-//                table.varchar("color", 100);
-//                table.decimal("precio", 10,2);
-//                table.intCol("codigo_categoria");
-//                table.foreignKey("codigo_categoria").references("caregorias").on("codigo");
-//            });
-//
-//            dawDB.schema.dropIfExists("suministros");
-//            dawDB.schema.createIfNotExists("suministros", table -> {
-//                table.intCol("codigo_proovedor").setPrimaryKey(true);
-//                table.intCol("codigo_pieza").setPrimaryKey(true);
-//                table.datetime("fecha_hora").setPrimaryKey(true);
-//                table.intCol("cantidad");
-//
-//                table.foreignKey("codigo_proovedor").references("proveedores").on("codigo");
-//                table.foreignKey("codigo_pieza").references("piezas").on("codigo");
-//            });
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
+    static void main() {
+
+        try {
+            NbaDB db = new NbaDB("jugadores,estadisticas");
+
+            ResultSet result = db.executeSelect("select jugadores.Nombre, estadisticas.temporada,estadisticas.Puntos_por_partido from jugadores,estadisticas where" +
+                    " estadisticas.jugador=jugadores.codigo and" +
+                    " (temporada,Puntos_por_partido) in (select" +
+                    " temporada,max(Puntos_por_partido) from estadisticas group by" +
+                    " temporada) order by estadisticas.temporada;");
+
+            if (result.next()) {
+                Table.instance()
+                        .addRow("Nombre", result.getObject(1).toString())
+                        .addRow("temporada", result.getObject(2).toString())
+                        .addRow("Puntos por partido", result.getObject(3).toString())
+                        .print();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

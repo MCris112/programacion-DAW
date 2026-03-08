@@ -1,18 +1,34 @@
 package Activities.Activity4;
 
 
-public class Partido {
+import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Database.Model;
 
+public class Partido extends Model {
+
+    @DBColPrimary
+    @DbColumn
     protected int codigo;
 
+    @Override
+    public String getKeyName() {
+        return "codigo";
+    }
+
+    @DbColumn
     protected String equipoLocal;
 
+    @DbColumn
     protected String equipoVisitante;
 
+    @DbColumn
     protected int puntosLocal;
 
+    @DbColumn
     protected int puntosVisitante;
 
+    @DbColumn
     protected String temporada;
 
 
@@ -62,5 +78,22 @@ public class Partido {
 
     public void setTemporada(String temporada) {
         this.temporada = temporada;
+    }
+
+    @Override
+    public String getDatabaseName() {
+        return "nba";
+    }
+
+    @Override
+    public String toString() {
+        return "Partido{" +
+                "codigo=" + codigo +
+                ", equipoLocal='" + equipoLocal + '\'' +
+                ", equipoVisitante='" + equipoVisitante + '\'' +
+                ", puntosLocal=" + puntosLocal +
+                ", puntosVisitante=" + puntosVisitante +
+                ", temporada='" + temporada + '\'' +
+                '}';
     }
 }

@@ -1,5 +1,4 @@
-
-* Diapositiva 40
+Diapositiva 40
 
 
 ir a:
