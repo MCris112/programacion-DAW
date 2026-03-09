@@ -1,19 +1,19 @@
 package Activities.Activity8;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Primary;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class CursoEscolar extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     private int id;
 
-    @DbColumn
+    @Column
     private int anoInicio;
 
-    @DbColumn
+    @Column
     private int anoFin;
 
     public CursoEscolar() {

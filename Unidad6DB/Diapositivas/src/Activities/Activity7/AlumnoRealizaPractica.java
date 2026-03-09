@@ -1,24 +1,24 @@
 package Activities.Activity7;
 
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class AlumnoRealizaPractica extends Model {
 
 
     @DBForeign(model= Alumno.class)
-    @DbColumn
+    @Column
     private int alumnoId;
 
     @DBForeign(model= Practica.class)
-    @DbColumn
+    @Column
     private int practicaId;
 
-    @DbColumn
+    @Column
     private String fecha;
 
-    @DbColumn
+    @Column
     private double nota;
 
     public int getAlumnoId() {

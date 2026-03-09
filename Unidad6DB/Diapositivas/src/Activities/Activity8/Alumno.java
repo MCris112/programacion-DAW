@@ -1,13 +1,13 @@
 package Activities.Activity8;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Primary;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Alumno extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     protected int numeroMatricula;
 
     @Override
@@ -15,16 +15,16 @@ public class Alumno extends Model {
         return "numero_matricula";
     }
 
-    @DbColumn
+    @Column
     protected String nombre;
 
-    @DbColumn
+    @Column
     protected String apellidos;
 
-    @DbColumn
+    @Column
     protected String fechaNacimiento;
 
-    @DbColumn
+    @Column
     protected String telefono;
 
     public Alumno() {

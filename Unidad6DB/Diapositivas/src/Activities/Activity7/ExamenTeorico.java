@@ -1,29 +1,29 @@
 package Activities.Activity7;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.Primary;
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 import java.sql.Date;
 
 public class ExamenTeorico extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     private int id;
 
-    @DbColumn
+    @Column
     private String titulo;
 
-    @DbColumn
+    @Column
     private int numeroPreguntas;
 
-    @DbColumn
+    @Column
     private String fecha;
 
     @DBForeign(model = Profesor.class)
-    @DbColumn
+    @Column
     private int profesorId;
 
     public ExamenTeorico() {

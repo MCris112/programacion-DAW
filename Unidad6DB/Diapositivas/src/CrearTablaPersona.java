@@ -23,7 +23,7 @@ public class CrearTablaPersona {
 //        }
 
         String sql = "CREATE TABLE IF NOT EXISTS persona (" +
-                "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                "id INT AUTO_INCREMENT Primary KEY, " +
                 "nombre VARCHAR(100), " +
                 "email VARCHAR(100)" +
                 ")";

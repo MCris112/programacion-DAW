@@ -1,21 +1,21 @@
 package Activities.Activity9;
 
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class EsPrerequisito extends Model {
 
 
     @DBForeign(model = Curso.class)
-    @DbColumn
+    @Column
     private int cursoId;
 
     @DBForeign(model = Curso.class)
-    @DbColumn
+    @Column
     private int requisitoId;
 
-    @DbColumn
+    @Column
     private boolean esObligatorio;
 
     public EsPrerequisito() {

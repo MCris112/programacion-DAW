@@ -1,14 +1,14 @@
 package Activities.Activity8;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.Primary;
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Asignatura extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     private int codigo;
 
     @Override
@@ -16,14 +16,14 @@ public class Asignatura extends Model {
         return "codigo";
     }
 
-    @DbColumn
+    @Column
     private String nombre;
 
-    @DbColumn
+    @Column
     private int numeroHoras;
 
     @DBForeign(model = Profesor.class)
-    @DbColumn
+    @Column
     private int profesorId;
 
     public Asignatura() {

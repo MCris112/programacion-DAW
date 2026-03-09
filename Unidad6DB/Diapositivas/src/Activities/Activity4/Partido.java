@@ -1,14 +1,14 @@
 package Activities.Activity4;
 
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Primary;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Partido extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     protected int codigo;
 
     @Override
@@ -16,19 +16,19 @@ public class Partido extends Model {
         return "codigo";
     }
 
-    @DbColumn
+    @Column
     protected String equipoLocal;
 
-    @DbColumn
+    @Column
     protected String equipoVisitante;
 
-    @DbColumn
+    @Column
     protected int puntosLocal;
 
-    @DbColumn
+    @Column
     protected int puntosVisitante;
 
-    @DbColumn
+    @Column
     protected String temporada;
 
 

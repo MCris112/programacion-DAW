@@ -1,30 +1,30 @@
 package Activities.Activity1;
 
 
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Jugador extends Model {
 
-    @DbColumn
+    @Column
     protected int codigo;
 
-    @DbColumn("Nombre")
+    @Column("Nombre")
     protected String nombre;
 
-    @DbColumn("Procedencia")
+    @Column("Procedencia")
     protected String procedencia;
 
-    @DbColumn("Altura")
+    @Column("Altura")
     protected String altura;
 
-    @DbColumn("Peso")
+    @Column("Peso")
     protected int peso;
 
-    @DbColumn("Posicion")
+    @Column("Posicion")
     protected String posicion;
 
-    @DbColumn("Nombre_equipo")
+    @Column("Nombre_equipo")
     protected String nombreEquipo;
 
 

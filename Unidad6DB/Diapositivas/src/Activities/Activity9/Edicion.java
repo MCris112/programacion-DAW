@@ -1,34 +1,34 @@
 package Activities.Activity9;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.Primary;
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Edicion extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     private int id;
 
-    @DbColumn
+    @Column
     private String fechaInicio;
 
-    @DbColumn
+    @Column
     private String fechaFin;
 
-    @DbColumn
+    @Column
     private String horario;
 
-    @DbColumn
+    @Column
     private String lugar;
 
     @DBForeign(model = Curso.class)
-    @DbColumn
+    @Column
     private int cursoId;
 
     @DBForeign(model = EmpleadoCapacitado.class)
-    @DbColumn
+    @Column
     private int empleadoId;
 
     public Edicion() {

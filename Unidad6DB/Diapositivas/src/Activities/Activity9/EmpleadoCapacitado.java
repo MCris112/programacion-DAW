@@ -1,27 +1,27 @@
 package Activities.Activity9;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Primary;
+import com.darkredgm.querymc.Annotations.Column;
 
 public class EmpleadoCapacitado extends Empleado{
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     protected Integer id;
 
-    @DbColumn
+    @Column
     protected String nombre;
 
-    @DbColumn
+    @Column
     protected String apellidos;
 
-    @DbColumn
+    @Column
     protected String telefono;
 
-    @DbColumn
+    @Column
     protected String direccion;
 
-    @DbColumn
+    @Column
     protected String tipo; //Capacitado/NoCapacitado
 
     public EmpleadoCapacitado() {

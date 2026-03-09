@@ -1,19 +1,19 @@
 package Activities.Activity7;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Primary;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Practica extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     protected int id;
 
-    @DbColumn
+    @Column
     protected String titulo;
 
-    @DbColumn
+    @Column
     protected String dificultad;
 
     public Practica() {

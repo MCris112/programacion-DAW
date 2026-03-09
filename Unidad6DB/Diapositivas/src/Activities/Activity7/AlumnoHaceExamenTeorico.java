@@ -1,20 +1,20 @@
 package Activities.Activity7;
 
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class AlumnoHaceExamenTeorico extends Model {
 
     @DBForeign(model= Alumno.class)
-    @DbColumn
+    @Column
     private int alumnoId;
 
     @DBForeign(model = ExamenTeorico.class)
-    @DbColumn
+    @Column
     private int examenTeorico;
 
-    @DbColumn
+    @Column
     private int nota;
 
     public int getAlumnoId() {

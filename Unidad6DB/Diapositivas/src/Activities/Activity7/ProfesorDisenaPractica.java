@@ -1,20 +1,20 @@
 package Activities.Activity7;
 
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class ProfesorDisenaPractica extends Model {
 
     @DBForeign(model=Profesor.class)
-    @DbColumn
+    @Column
     private int profesorId;
 
     @DBForeign(model=Practica.class)
-    @DbColumn
+    @Column
     private int practicaId;
 
-    @DbColumn
+    @Column
     private String fecha;
 
     public int getProfesorId() {

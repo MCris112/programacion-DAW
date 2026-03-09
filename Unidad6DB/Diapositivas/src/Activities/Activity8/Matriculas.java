@@ -1,22 +1,22 @@
 package Activities.Activity8;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.Primary;
 import com.darkredgm.querymc.Annotations.DBForeign;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Matriculas extends Model {
 
     @DBForeign(model = Alumno.class)
-    @DbColumn
+    @Column
     private int alumnoId;
 
     @DBForeign(model = CursoEscolar.class)
-    @DbColumn
+    @Column
     private int cursoEscolarId;
 
     @DBForeign(model = Asignatura.class)
-    @DbColumn
+    @Column
     private int asignaturaId;
 
     public Matriculas() {
