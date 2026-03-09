@@ -1,7 +1,7 @@
 package Core;
 
 import Models.Alumno;
-import com.darkredgm.querymc.Annotations.DBColPrimary;
+import com.darkredgm.querymc.Annotations.Primary;
 import com.darkredgm.querymc.Database.Model;
 import com.darkredgm.querymc.Database.ModelAttribute;
 import com.darkredgm.querymc.Database.ORM.QueryBuilder;
@@ -22,7 +22,7 @@ public class Service {
         Field pk = null;
 
         for (Field field : modelClass.getDeclaredFields()) {
-            if ( field.isAnnotationPresent(DBColPrimary.class))
+            if ( field.isAnnotationPresent(Primary.class))
             {
                 pk = field;
             }

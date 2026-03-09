@@ -1,25 +1,25 @@
 package Models;
 
-import com.darkredgm.querymc.Annotations.DBColPrimary;
-import com.darkredgm.querymc.Annotations.DbColumn;
+import com.darkredgm.querymc.Annotations.Primary;
+import com.darkredgm.querymc.Annotations.Column;
 import com.darkredgm.querymc.Database.Model;
 
 public class Profesor extends Model {
 
-    @DBColPrimary
-    @DbColumn
+    @Primary
+    @Column
     private int id;
 
-    @DbColumn
+    @Column
     private String nombre;
 
-    @DbColumn
+    @Column
     private String apellido;
 
-    @DbColumn
+    @Column
     private String especialidad;
 
-    @DbColumn
+    @Column
     private String telefono;
 
     public Profesor() {
@@ -71,5 +71,11 @@ public class Profesor extends Model {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+
+    @Override
+    public String getDatabaseName() {
+        return "cristopher_activity_12";
     }
 }

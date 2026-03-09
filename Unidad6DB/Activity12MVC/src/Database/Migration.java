@@ -8,12 +8,8 @@ import java.sql.SQLException;
 public class Migration {
 
     static void main() throws SQLException {
-        DB.createDatabaseIfNotExists("cristopher_matriculas");
+        DB.createDatabaseIfNotExists("cristopher_activity_12");
 
-        DB.verify( Alumno.class );
-        DB.verify( Asignatura.class );
-        DB.verify( CursoEscolar.class );
-        DB.verify( Profesor.class );
-        DB.verify( Matricula.class );
+        DB.verify(Alumno.class, Asignatura.class, CursoEscolar.class, Profesor.class, Matricula.class);
     }
 }

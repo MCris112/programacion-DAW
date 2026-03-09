@@ -69,7 +69,16 @@ public class BaseView {
                 String line = scanner.nextLine();
 
                 if ( !line.isEmpty() )
-                    model.setAttribute( attribute.getName(), line );
+                {
+                    switch ( attribute.asField().getType().getSimpleName() )
+                    {
+                        case "int", "Integer": model.setAttribute( attribute.getName(), Integer.parseInt(line) ); break;
+                        case "double", "Double": model.setAttribute( attribute.getName(), Double.parseDouble(line) ); break;
+                        default:
+                            model.setAttribute( attribute.getName(), line);
+                    }
+                }
+                    ;
             }
 
             model.save();

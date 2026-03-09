@@ -13,11 +13,10 @@ public class App {
 
     static Scanner sc = new Scanner(System.in);
 
-    ArrayList<BaseController> controllers = new  ArrayList<>();
+    ArrayList<BaseController> controllers = new ArrayList<>();
 
-    public void init()
-    {
-        try{
+    public void init() {
+        try {
             loadControllers();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -38,12 +37,12 @@ public class App {
         URL[] urls = { controllersDir.toURI().toURL() };
         URLClassLoader loader = new URLClassLoader(urls, Thread.currentThread().getContextClassLoader());
 
-        File[] classFiles = controllersDir.listFiles((dir, name) -> name.endsWith(".class") || name.endsWith(".java") );
+        File[] classFiles = controllersDir.listFiles((dir, name) -> name.endsWith(".class") || name.endsWith(".java"));
         System.out.println("Class files found: " + classFiles.length);
 
         for (File cf : classFiles) {
             String simpleName = cf.getName().replace(".class", "").replace(".java", "");
-            String fullClassName = "Controller." + simpleName;  // Adjust package if different
+            String fullClassName = "Controller." + simpleName; // Adjust package if different
 
             try {
                 Class<?> cls = loader.loadClass(fullClassName);
@@ -57,43 +56,40 @@ public class App {
             } catch (ClassNotFoundException e) {
                 System.err.println("Class not found: " + fullClassName + " (check package/compile)");
                 e.printStackTrace();
-            } catch (Exception e) {  // Instantiation errors
+            } catch (Exception e) { // Instantiation errors
                 System.err.println("Failed to instantiate: " + fullClassName);
                 e.printStackTrace();
             }
         }
-        loader.close();  // Good practice
+        loader.close(); // Good practice
     }
 
-    public void showMenu()
-    {
+    public void showMenu() {
         Table table = Table.instance().addRow("Opcion", "Nombre");
 
         for (int i = 0; i < this.controllers.size(); i++) {
-            table.addRow( i+1+"", this.controllers.get(i).getName() );
+            table.addRow(i + 1 + "", this.controllers.get(i).getName());
         }
 
         table.print();
 
         System.out.println("Seleccione una opción: ");
 
-        // TODO, ENTRA EN BUCLE CUANDO HAY ERROR
-        if ( sc.hasNextInt() )
-        {
-            int opcion =  sc.nextInt() - 1;
+        if (sc.hasNextInt()) {
+            int opcion = sc.nextInt() - 1;
 
-            if (opcion < 0 || opcion >= controllers.size())
-            {
+            if (opcion < 0 || opcion >= controllers.size()) {
                 System.out.println("Opción no valida");
                 System.out.println("\n".repeat(10));
 
-            }else{
-                showControllerMenu( controllers.get(opcion) );
+            } else {
+                showControllerMenu(controllers.get(opcion));
                 return;
             }
 
-
-        }else{
+        } else {
+            sc.next(); // Consumir la entrada inválida ("|" u otras letras) para que no se quede
+                       // atascada en el buffer
             System.out.println("Opción no valida");
             System.out.println("\n".repeat(10));
         }
@@ -101,32 +97,48 @@ public class App {
         showMenu();
     }
 
-    public void showControllerMenu( BaseController controller )
-    {
+    public void showControllerMenu(BaseController controller) {
         System.out.println("-".repeat(20));
-        System.out.println("1 - [GET] api/"+controller.getName() );
-        System.out.println("2 - [POST] api/"+controller.getName() );
-        System.out.println("3 - [SHOW] api/"+controller.getName()+"/[id]" );
-        System.out.println("4 - [PUT] api/"+controller.getName()+"/[id]" );
-        System.out.println("5 - [DELETE] api/"+controller.getName() );
+        System.out.println("1 - [GET] api/" + controller.getName());
+        System.out.println("2 - [POST] api/" + controller.getName());
+        System.out.println("3 - [SHOW] api/" + controller.getName() + "/[id]");
+        System.out.println("4 - [PUT] api/" + controller.getName() + "/[id]");
+        System.out.println("5 - [DELETE] api/" + controller.getName());
+        System.out.println(".. - Volver atrás");
         System.out.println("-".repeat(20));
 
-        if ( sc.hasNextInt() ) {
+        if (sc.hasNextInt()) {
 
-            switch (sc.nextInt())
-            {
-                case 1: controller.index(); break;
-                case 2: controller.store(); break;
-                case 3: controller.show(); break;
-                case 4: controller.update(); break;
-                case 5: controller.delete(); break;
+            switch (sc.nextInt()) {
+                case 1:
+                    controller.index();
+                    break;
+                case 2:
+                    controller.store();
+                    break;
+                case 3:
+                    controller.show();
+                    break;
+                case 4:
+                    controller.update();
+                    break;
+                case 5:
+                    controller.delete();
+                    break;
                 default:
                     MC.title.outlineY("OPCIÓN NO VÁLIDA");
                     break;
             }
 
             sc.nextLine();
-        }else{
+        } else {
+            String input = sc.next();
+
+            if (input.equals("..")) {
+                System.out.println("\n".repeat(10)); // Limpiar pantalla virtual
+                showMenu();
+                return;
+            }
             MC.title.outlineY("COLOQUE UNA OPCIÓN CORRECTA");
         }
 
