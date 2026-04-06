@@ -10,7 +10,7 @@ public class Migration {
 
     static void main() throws SQLException {
         try{
-            DB.deleteDatabase("cristopher_proovedor_gui");
+            DB.deleteDatabase("<cristopher_proovedor_gui>");
         }catch(SQLException e){
             System.out.println("Error al borrar datos del proveedor");
         }
@@ -23,5 +23,6 @@ public class Migration {
                 Proveedor.class,
                 Suministro.class
         );
+
     }
 }
