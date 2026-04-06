@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(title='Generación ' + ${generation} + ' - Pokédex', head=~{}, content=~{::main})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Pokédex Spring Boot</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/pokemon.css}">
 </head>
-<body class="bg-light">
+<body>
 
-<div th:replace="~{fragments/navbar :: menu}"></div>
+<main class="container mb-5 pb-5 mt-4">
+    <div class="text-center mb-5 animate-in">
+        <h1 class="display-4 fw-bold">Pokémon de la <span class="text-danger" th:text="'Generación ' + ${generation}">Generación #</span></h1>
+        <p class="text-secondary">Explorando los descubrimientos de esta región específica.</p>
+    </div>
 
-
-<div class="container text-center mt-5">
-    <h1 class="mb-4">Pokédex de la generación <span th:text="${generation}">#</span></h1>
-    <div class="row">
-        <div class="col-md-2" th:each="pokemon : ${pokemons}">
-            <div class="card">
-                <img th:src="${pokemon.imagen}" class="card-img-top" alt="pokemon">
+    <div class="row g-4 justify-content-center">
+        <!-- Pokémon Card Loop -->
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 animate-in" 
+             th:each="pokemon, iter : ${pokemons}"
+             th:style="'animation-delay: ' + (${iter.index} * 0.05) + 's'">
+            
+            <div class="pokemon-card">
+                <div class="card-img-container">
+                    <img th:src="${pokemon.imagen}" class="card-img-top" th:alt="${pokemon.nombre}">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <span th:text="${pokemon.numero}"></span> - <span th:text="${pokemon.nombre}"></span>
-                    </h5>
-                    <a th:href="@{/pokemons/{id}(id=${pokemon.numero})}" class="btn btn-primary">
-                        Ver detalle
+                    <span class="pokemon-id" th:text="'#' + ${pokemon.numero}">#001</span>
+                    <h5 class="pokemon-name" th:text="${pokemon.nombre}">Bulbasaur</h5>
+                    
+                    <a th:href="@{/pokemons/{id}(id=${pokemon.numero})}" class="btn-poke w-100">
+                        Ver Detalles
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

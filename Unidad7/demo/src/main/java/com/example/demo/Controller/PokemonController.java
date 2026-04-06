@@ -19,15 +19,10 @@ public class PokemonController {
 
     @GetMapping({"/"})
     public String index(Model model) {
-
-        // Si no se pasa id, usaré un Pokemon aleatorio
-
-
-
         Random r = new Random();
 
         ArrayList<Pokemon> pokemons = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 10; i++) {
             int id = r.nextInt(150) + 1;
             Pokemon pokemon = service.obtenerPokemon( id );
 
@@ -38,7 +33,6 @@ public class PokemonController {
 
             pokemons.add(pokemon);
         }
-
 
         model.addAttribute("pokemons", pokemons);
 
