@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -54,15 +55,19 @@ public class PokemonController {
         return "pokemon";
     }
     @GetMapping({"/pokemons/generations/{id}"})
-    public String mostrarPokemons(@PathVariable Integer id, Model model) {
+    public String mostrarPokemons(@PathVariable Integer id, 
+                                  @RequestParam(value = "page", defaultValue = "1") int page,
+                                  Model model) {
 
         if ( id == 3 )
             return "error"; // Only for debugging
 
-        ArrayList<Pokemon> pokemons = service.getPokemonsFromGeneration(id, 1, 15);
+        PokemonService.PokemonPage pagedResult = service.getPokemonsFromGeneration(id, page, 15);
 
-        model.addAttribute("pokemons", pokemons);
+        model.addAttribute("pokemons", pagedResult.pokemons);
         model.addAttribute("generation", id);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pagedResult.totalPages);
 
         return "generation"; // plantilla pokemon.html
     }

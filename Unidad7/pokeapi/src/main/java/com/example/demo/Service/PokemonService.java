@@ -41,16 +41,30 @@ public class PokemonService {
         return obtenerPokemon( pokemonSpecie.getPokemonId() );
     }
 
-    public ArrayList<Pokemon> getPokemonsFromGeneration(int number, int page, int perPage)
+    public static class PokemonPage {
+        public ArrayList<Pokemon> pokemons;
+        public int totalPages;
+        public PokemonPage(ArrayList<Pokemon> pokemons, int totalPages) {
+            this.pokemons = pokemons;
+            this.totalPages = totalPages;
+        }
+    }
+
+    public PokemonPage getPokemonsFromGeneration(int number, int page, int perPage)
     {
         GenerationResponse generation = getPokemonGenerations(number);
 
         ArrayList<Pokemon> pokemons = new ArrayList<>();
 
-        for (int i = ((page * perPage) - perPage); i < perPage; i++) {
+        int total = generation.getPokemonSpecies().size();
+        int startIndex = (page - 1) * perPage;
+        int endIndex = Math.min(startIndex + perPage, total);
+
+        for (int i = startIndex; i < endIndex; i++) {
             pokemons.add(getPokemonFromSpecie( generation.getPokemonSpecies().get(i) ));
         }
 
-        return pokemons;
+        int totalPages = (int) Math.ceil((double) total / perPage);
+        return new PokemonPage(pokemons, totalPages);
     }
 }

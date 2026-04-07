@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(title='Detalles: ' + ${pokemon.nombre}, head=~{::#head}, content=~{::main})}">
+<head>
+    <div id="head">
+        <style>
+            .detail-card {
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 40px;
+                padding: 3rem;
+                margin-top: 2rem;
+                overflow: hidden;
+                position: relative;
+            }
+            .detail-img {
+                width: 300px;
+                height: 300px;
+                object-fit: contain;
+                filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+                animation: float 4s ease-in-out infinite;
+            }
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+            .detail-info {
+                text-align: left;
+            }
+            .badge-type {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 0.5rem 1.5rem;
+                border-radius: 100px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        </style>
+    </div>
+</head>
+<body>
+
+<main class="container py-5 mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="detail-card animate-in">
+                <div class="row align-items-center g-5">
+                    <div class="col-md-5 text-center">
+                        <div class="position-relative">
+                            <div class="position-absolute top-50 start-50 translate-middle" style="width: 250px; height: 250px; background: var(--poke-red); filter: blur(100px); opacity: 0.2; z-index: -1;"></div>
+                            <img th:src="${pokemon.imagen}" class="detail-img" th:alt="${pokemon.nombre}">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="detail-info">
+                            <span class="text-secondary fw-bold mb-2 d-block" th:text="'ID: #' + ${pokemon.numero}">ID: #001</span>
+                            <h1 class="display-3 fw-bold mb-4" th:text="${pokemon.nombre}" style="text-transform: capitalize;">Bulbasaur</h1>
+                            
+                            <div class="d-flex flex-wrap gap-2 mb-5">
+                                <span class="badge-type" th:each="tipo : ${pokemon.tipos}" th:text="${tipo}">Pokémon</span>
+                            </div>
+                            
+                            <div class="row g-4 mb-4">
+                                <div class="col-6 col-sm-4">
+                                    <h6 class="text-secondary mb-1">Altura</h6>
+                                    <p class="h5" th:text="${pokemon.altura} + ' m'">-- m</p>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <h6 class="text-secondary mb-1">Peso</h6>
+                                    <p class="h5" th:text="${pokemon.peso} + ' kg'">-- kg</p>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <h6 class="text-secondary mb-1">Habilidades</h6>
+                                    <div class="d-flex flex-wrap gap-2 mt-1">
+                                        <span class="badge bg-secondary opacity-75" th:each="hab : ${pokemon.habilidades}" th:text="${hab}" style="text-transform: capitalize; padding: 0.5em 0.8em; font-weight: normal;">--</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="border-secondary opacity-25 my-4">
+                            
+                            <h5 class="fw-bold mb-3">Estadísticas Base</h5>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-white opacity-75">HP</span>
+                                    <span class="text-white fw-bold" th:text="${pokemon.hp}">0</span>
+                                </div>
+                                <div class="progress" style="height: 8px; border-radius: 10px; background: rgba(255,255,255,0.1);">
+                                    <div class="progress-bar bg-success" role="progressbar" th:style="'width: ' + (${pokemon.hp} / 2.55) + '%'"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-white opacity-75">Ataque</span>
+                                    <span class="text-white fw-bold" th:text="${pokemon.ataque}">0</span>
+                                </div>
+                                <div class="progress" style="height: 8px; border-radius: 10px; background: rgba(255,255,255,0.1);">
+                                    <div class="progress-bar bg-danger" role="progressbar" th:style="'width: ' + (${pokemon.ataque} / 2.55) + '%'"></div>
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-white opacity-75">Defensa</span>
+                                    <span class="text-white fw-bold" th:text="${pokemon.defensa}">0</span>
+                                </div>
+                                <div class="progress" style="height: 8px; border-radius: 10px; background: rgba(255,255,255,0.1);">
+                                    <div class="progress-bar bg-info" role="progressbar" th:style="'width: ' + (${pokemon.defensa} / 2.55) + '%'"></div>
+                                </div>
+                            </div>
+                            
+                            <a href="/" class="btn btn-outline-light rounded-pill px-4 py-2 mt-2" style="border-color: rgba(255,255,255,0.3);">
+                                <i class="bi bi-arrow-left me-2"></i> Volver a la Lista
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

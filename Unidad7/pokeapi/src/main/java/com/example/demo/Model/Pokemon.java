@@ -13,6 +13,9 @@ public class Pokemon {
     private int ataque;
     private int defensa;
     private List<String> tipos; // puede tener varios tipos el Pokemon
+    private List<String> habilidades;
+    private double peso; // kg
+    private double altura; // metros
     public Pokemon() {}
 
     public Pokemon(PokemonResponse response) {
@@ -24,7 +27,17 @@ public class Pokemon {
         this.ataque = response.getStats().get(1).getBase_stat();
         this.defensa = response.getStats().get(2).getBase_stat();
         // convertir lista de TypeSlot a lista de nombres de tipos
-        this.tipos = response.getTypes().stream().map(typeSlot -> typeSlot.getType().getName()).collect(Collectors.toList());
+        if (response.getTypes() != null) {
+            this.tipos = response.getTypes().stream().map(typeSlot -> typeSlot.getType().getName()).collect(Collectors.toList());
+        }
+        
+        if (response.getAbilities() != null) {
+            this.habilidades = response.getAbilities().stream().map(abilitySlot -> abilitySlot.getAbility().getName()).collect(Collectors.toList());
+        }
+        
+        // PokeAPI devuelve altura en decimetros y peso en hectogramos
+        this.altura = response.getHeight() / 10.0;
+        this.peso = response.getWeight() / 10.0;
     }
 
     public int getNumero() {
@@ -81,5 +94,29 @@ public class Pokemon {
 
     public void setTipos(List<String> tipos) {
         this.tipos = tipos;
+    }
+
+    public List<String> getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(List<String> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
     }
 }

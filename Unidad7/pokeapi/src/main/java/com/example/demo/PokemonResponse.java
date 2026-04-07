@@ -10,6 +10,7 @@ public class PokemonResponse {
     private List<Stat> stats;
     private List<TypeSlot> types;
     private Sprites sprites;
+    private List<AbilitySlot> abilities;
 
     public PokemonResponse() {
     }
@@ -70,6 +71,14 @@ public class PokemonResponse {
 
     public void setSprites(Sprites sprites) {
         this.sprites = sprites;
+    }
+
+    public List<AbilitySlot> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<AbilitySlot> abilities) {
+        this.abilities = abilities;
     }
 
     public static class Stat {
@@ -180,6 +189,34 @@ public class PokemonResponse {
 
         public void setFront_default(String front_default) {
             this.front_default = front_default;
+        }
+    }
+
+    public static class AbilitySlot {
+        private AbilityInfo ability;
+
+        public AbilitySlot() {}
+
+        public AbilityInfo getAbility() {
+            return ability;
+        }
+
+        public void setAbility(AbilityInfo ability) {
+            this.ability = ability;
+        }
+    }
+
+    public static class AbilityInfo {
+        private String name;
+
+        public AbilityInfo() {}
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

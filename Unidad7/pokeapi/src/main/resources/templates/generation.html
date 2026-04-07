@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(title='Generación ' + ${generation} + ' - Pokédex', head=~{}, content=~{::main})}">
+<head>
+</head>
+<body>
+
+<main class="container mb-5 pb-5 mt-4">
+    <div class="text-center mb-5 animate-in">
+        <h1 class="display-4 fw-bold">Pokémon de la <span class="text-danger" th:text="'Generación ' + ${generation}">Generación #</span></h1>
+        <p class="text-secondary">Explorando los descubrimientos de esta región específica.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Pokémon Card Loop -->
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 animate-in" 
+             th:each="pokemon, iter : ${pokemons}"
+             th:style="'animation-delay: ' + (${iter.index} * 0.05) + 's'">
+            
+            <div class="pokemon-card">
+                <div class="card-img-container">
+                    <img th:src="${pokemon.imagen}" class="card-img-top" th:alt="${pokemon.nombre}">
+                </div>
+                <div class="card-body">
+                    <span class="pokemon-id" th:text="'#' + ${pokemon.numero}">#001</span>
+                    <h5 class="pokemon-name" th:text="${pokemon.nombre}" style="text-transform: capitalize;">Bulbasaur</h5>
+                    
+                    <a th:href="@{/pokemons/{id}(id=${pokemon.numero})}" class="btn-poke w-100">
+                        Ver Detalles
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paginación -->
+    <nav aria-label="Navegación de páginas" class="mt-5" th:if="${totalPages > 1}">
+        <ul class="pagination justify-content-center">
+            <!-- Botón Anterior -->
+            <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
+                <a class="page-link" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;" 
+                   th:href="@{/pokemons/generations/{id}(id=${generation}, page=${currentPage - 1})}">Anterior</a>
+            </li>
+            
+            <!-- Números de Página -->
+            <li class="page-item" th:each="p : ${#numbers.sequence(1, totalPages)}">
+                <a class="page-link fw-bold" 
+                   th:classappend="${currentPage == p ? 'bg-danger border-danger text-white' : ''}"
+                   th:style="${currentPage != p ? 'background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;' : ''}"
+                   th:href="@{/pokemons/generations/{id}(id=${generation}, page=${p})}" th:text="${p}">1</a>
+            </li>
+            
+            <!-- Botón Siguiente -->
+            <li class="page-item" th:classappend="${currentPage == totalPages ? 'disabled' : ''}">
+                <a class="page-link" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;" 
+                   th:href="@{/pokemons/generations/{id}(id=${generation}, page=${currentPage + 1})}">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</main>
+
+</body>
+</html>
