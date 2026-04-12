@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -55,29 +54,23 @@ public class PokemonController {
         return "pokemon";
     }
     @GetMapping({"/pokemons/generations/{id}"})
-    public String mostrarPokemons(@PathVariable Integer id, 
-                                  @RequestParam(value = "page", defaultValue = "1") int page,
-                                  Model model) {
+    public String mostrarPokemons(@PathVariable Integer id, Model model) {
 
-        if ( id == 3 )
-            return "error"; // Only for debugging
-
-        PokemonService.PokemonPage pagedResult = service.getPokemonsFromGeneration(id, page, 15);
-
-        model.addAttribute("pokemons", pagedResult.pokemons);
-        model.addAttribute("generation", id);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", pagedResult.totalPages);
-
-        return "generation"; // plantilla pokemon.html
-    }
-
-    private Pokemon obtenerPokemon(Integer id) {
-        Pokemon pokemon = service.obtenerPokemon(id);
-        if (pokemon == null) {
-            return null;
+        // En base en lo que pide la actividad que tire error
+        if (id == 3) {
+            return "error";
         }
-        pokemon.setImagen("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + id + ".png");
-        return pokemon;
+
+        ArrayList<Pokemon> pokemons = service.getRandomPokemonsFromGeneration(id, 10);
+
+        if (pokemons.isEmpty()) {
+            model.addAttribute("error", "No se pudieron obtener Pokémon de esta generación");
+            return "error";
+        }
+
+        model.addAttribute("pokemons", pokemons);
+        model.addAttribute("generation", id);
+
+        return "generation";
     }
 }

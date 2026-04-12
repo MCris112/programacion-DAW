@@ -10,12 +10,14 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PokemonService {
 
     private final String URL = "https://pokeapi.co/api/v2/pokemon/";
     private final RestTemplate restTemplate = new RestTemplate();
+
     public Pokemon obtenerPokemon(int id) {
         try {
             // Consumir la API y mapear a DTO
@@ -31,40 +33,47 @@ public class PokemonService {
         }
     }
 
-
-    public GenerationResponse getPokemonGenerations(int number)
-    {
-        return restTemplate.getForObject("https://pokeapi.co/api/v2/generation/"+number, GenerationResponse.class);
+    public GenerationResponse getPokemonGenerations(int number) {
+        return restTemplate.getForObject("https://pokeapi.co/api/v2/generation/" + number, GenerationResponse.class);
     }
 
-    public Pokemon getPokemonFromSpecie(PokemonSpecie pokemonSpecie){
-        return obtenerPokemon( pokemonSpecie.getPokemonId() );
+    public Pokemon getPokemonFromSpecie(PokemonSpecie pokemonSpecie) {
+        return obtenerPokemon(pokemonSpecie.getPokemonId());
     }
 
-    public static class PokemonPage {
-        public ArrayList<Pokemon> pokemons;
-        public int totalPages;
-        public PokemonPage(ArrayList<Pokemon> pokemons, int totalPages) {
-            this.pokemons = pokemons;
-            this.totalPages = totalPages;
-        }
-    }
-
-    public PokemonPage getPokemonsFromGeneration(int number, int page, int perPage)
-    {
+    public ArrayList<Pokemon> getRandomPokemonsFromGeneration(int number, int count) {
+        // Pedimos a la API todos los Pokémon de la generación
         GenerationResponse generation = getPokemonGenerations(number);
+        List<PokemonSpecie> species = generation.getPokemonSpecies();
+        ArrayList<Pokemon> selectedPokemons = new ArrayList<>();
+        Random random = new Random();
 
-        ArrayList<Pokemon> pokemons = new ArrayList<>();
+        int total = species.size();
+        // Si por lo que sea no hay Pokémon, devolvemos la lista vacía y nos quitamos de
+        // líos
+        if (total == 0)
+            return selectedPokemons;
 
-        int total = generation.getPokemonSpecies().size();
-        int startIndex = (page - 1) * perPage;
-        int endIndex = Math.min(startIndex + perPage, total);
+        // Creamos un array con todas las posiciones
+        // Esto es CLAVE para que no nos salgan Pokémon repetidos
+        ArrayList<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < total; i++)
+            indices.add(i);
 
-        for (int i = startIndex; i < endIndex; i++) {
-            pokemons.add(getPokemonFromSpecie( generation.getPokemonSpecies().get(i) ));
+        int actualCount = Math.min(count, total);
+        for (int i = 0; i < actualCount; i++) {
+            // Elegimos un número al azar de los que quedan en el array
+            int randomIndex = random.nextInt(indices.size());
+            // Sacamos de la lista para que no pueda volver a salir para evitar duplicados
+            int speciesIndex = indices.remove(randomIndex);
+
+            // Segun el indice/id que toco, obtenemos el pokemon
+            Pokemon pokemon = getPokemonFromSpecie(species.get(speciesIndex));
+            if (pokemon != null) {
+                selectedPokemons.add(pokemon);
+            }
         }
 
-        int totalPages = (int) Math.ceil((double) total / perPage);
-        return new PokemonPage(pokemons, totalPages);
+        return selectedPokemons;
     }
 }

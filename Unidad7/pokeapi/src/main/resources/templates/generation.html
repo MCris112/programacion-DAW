@@ -33,30 +33,7 @@
         </div>
     </div>
 
-    <!-- Paginación -->
-    <nav aria-label="Navegación de páginas" class="mt-5" th:if="${totalPages > 1}">
-        <ul class="pagination justify-content-center">
-            <!-- Botón Anterior -->
-            <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
-                <a class="page-link" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;" 
-                   th:href="@{/pokemons/generations/{id}(id=${generation}, page=${currentPage - 1})}">Anterior</a>
-            </li>
-            
-            <!-- Números de Página -->
-            <li class="page-item" th:each="p : ${#numbers.sequence(1, totalPages)}">
-                <a class="page-link fw-bold" 
-                   th:classappend="${currentPage == p ? 'bg-danger border-danger text-white' : ''}"
-                   th:style="${currentPage != p ? 'background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;' : ''}"
-                   th:href="@{/pokemons/generations/{id}(id=${generation}, page=${p})}" th:text="${p}">1</a>
-            </li>
-            
-            <!-- Botón Siguiente -->
-            <li class="page-item" th:classappend="${currentPage == totalPages ? 'disabled' : ''}">
-                <a class="page-link" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;" 
-                   th:href="@{/pokemons/generations/{id}(id=${generation}, page=${currentPage + 1})}">Siguiente</a>
-            </li>
-        </ul>
-    </nav>
+    </div>
 </main>
 
 </body>
